@@ -92,13 +92,13 @@ export const LoginScreen = ({ navigation }) => {
           style={styles.borderlessButtonContainer}
           borderless
           title={"Create a new account?"}
-          onPress={() => navigation.navigate("Signup")}
+          onPress={() => navigation.navigate("Register")}
         />
         <Button
           style={styles.borderlessButtonContainer}
           borderless
-          title={"Forgot Password"}
-          onPress={() => navigation.navigate("ForgotPassword")}
+          title={"Reset Password"}
+          onPress={() => navigation.navigate("ResetPasswordOnEmail")}
         />
       </KeyboardAwareScrollView>
     </View>
