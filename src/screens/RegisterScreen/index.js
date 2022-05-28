@@ -1,24 +1,31 @@
 import { useState } from "react";
 import { Text } from "react-native";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { styles } from "./styles";
+import { View, TextField, Button, FormErrorMessage } from "../../components";
 import { auth } from "../../config/firebase";
-import { loginValidationSchema } from "../../validation/schemas";
 import { useTogglePasswordVisibility } from "../../hooks/useTogglePassordVisibility";
-import { View, TextField, FormErrorMessage, Button } from "../../components";
+import { registerValidationSchema } from "../../validation/schemas";
 
-export const LoginScreen = ({ navigation }) => {
+export const RegisterScreen = ({ navigation }) => {
   const [errorState, setErrorState] = useState("");
-  const { passwordVisibility, handlePasswordVisibility, rightIcon } =
-    useTogglePasswordVisibility();
 
-  const handleLogin = (values) => {
+  const {
+    passwordVisibility,
+    handlePasswordVisibility,
+    rightIcon,
+    handleConfirmPasswordVisibility,
+    confirmPasswordIcon,
+    confirmPasswordVisibility,
+  } = useTogglePasswordVisibility();
+
+  const handleRegiter = (values) => {
     const { email, password } = values;
 
-    signInWithEmailAndPassword(auth, email, password).catch((error) =>
+    createUserWithEmailAndPassword(auth, email, password).catch((error) =>
       setErrorState(error.message)
     );
   };
@@ -26,15 +33,16 @@ export const LoginScreen = ({ navigation }) => {
   return (
     <View isSafe style={styles.container}>
       <KeyboardAwareScrollView enableOnAndroid={true}>
-        <Text style={styles.screenTitle}>Welcome back!</Text>
+        <Text style={styles.screenTitle}>Create a new account!</Text>
 
         <Formik
           initialValues={{
             email: "",
             password: "",
+            confirmPassword: "",
           }}
-          validationSchema={loginValidationSchema}
-          onSubmit={(values) => handleLogin(values)}
+          validationSchema={registerValidationSchema}
+          onSubmit={(values) => handleRegiter(values)}
         >
           {({
             values,
@@ -58,6 +66,7 @@ export const LoginScreen = ({ navigation }) => {
                 onBlur={handleBlur("email")}
               />
               <FormErrorMessage error={errors.email} visible={touched.email} />
+
               <TextField
                 name="password"
                 leftIconName="key-variant"
@@ -65,7 +74,7 @@ export const LoginScreen = ({ navigation }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry={passwordVisibility}
-                textContentType="password"
+                textContentType="newPassword"
                 rightIcon={rightIcon}
                 handlePasswordVisibility={handlePasswordVisibility}
                 value={values.password}
@@ -77,12 +86,31 @@ export const LoginScreen = ({ navigation }) => {
                 visible={touched.password}
               />
 
+              <TextField
+                name="confirmPassword"
+                leftIconName="key-variant"
+                placeholder="Enter password"
+                autoCapitalize="none"
+                autoCorrect={false}
+                secureTextEntry={confirmPasswordVisibility}
+                textContentType="password"
+                rightIcon={confirmPasswordIcon}
+                handlePasswordVisibility={handleConfirmPasswordVisibility}
+                value={values.confirmPassword}
+                onChangeText={handleChange("confirmPassword")}
+                onBlur={handleBlur("confirmPassword")}
+              />
+              <FormErrorMessage
+                error={errors.confirmPassword}
+                visible={touched.confirmPassword}
+              />
+
               {errorState !== "" ? (
                 <FormErrorMessage error={errorState} visible={true} />
               ) : null}
 
               <Button style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.buttonText}>Signup</Text>
               </Button>
             </>
           )}
@@ -91,14 +119,8 @@ export const LoginScreen = ({ navigation }) => {
         <Button
           style={styles.borderlessButtonContainer}
           borderless
-          title={"Create a new account?"}
-          onPress={() => navigation.navigate("Signup")}
-        />
-        <Button
-          style={styles.borderlessButtonContainer}
-          borderless
-          title={"Forgot Password"}
-          onPress={() => navigation.navigate("ForgotPassword")}
+          title={"Already have an account?"}
+          onPress={() => navigation.navigate("Login")}
         />
       </KeyboardAwareScrollView>
     </View>
