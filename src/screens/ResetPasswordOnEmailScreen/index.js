@@ -76,7 +76,7 @@ export const ResetPasswordOnEmailScreen = ({ navigation }) => {
         <Button
           style={styles.borderlessButtonContainer}
           borderless
-          title={"Go back to Login"}
+          title="Go back to Login"
           onPress={() => navigation.navigate("Login")}
         />
       </KeyboardAwareScrollView>

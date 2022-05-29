@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Pressable, Text } from "react-native";
 
-import { styles } from "./styles";
+import { Colors } from "../../theme/colors";
 
 export const Button = ({
   children,
@@ -10,6 +10,7 @@ export const Button = ({
   borderless = false,
   title,
   style,
+  color = Colors.blue,
 }) => {
   const _style = useCallback(({ pressed }) => [
     style,
@@ -19,7 +20,7 @@ export const Button = ({
   if (borderless) {
     return (
       <Pressable onPress={onPress} style={_style}>
-        <Text style={styles.borderlessButtonText}>{title}</Text>
+        <Text style={{ fontSize: 16, color }}>{title}</Text>
       </Pressable>
     );
   }

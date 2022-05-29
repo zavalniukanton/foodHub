@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     paddingRight: 100,
     fontWeight: "400",
     fontSize: 14,
-    color: Colors.mediumGray,
+    color: Colors.gray,
   },
   button: {
     alignSelf: "center",

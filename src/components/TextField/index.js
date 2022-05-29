@@ -22,14 +22,14 @@ export const TextField = ({
         <Icon
           name={leftIconName}
           size={22}
-          color={Colors.mediumGray}
+          color={Colors.gray}
           style={{ marginRight: 10 }}
         />
       ) : null}
 
       <TextInput
         style={styles.input}
-        placeholderTextColor={Colors.mediumGray}
+        placeholderTextColor={Colors.gray}
         {...otherProps}
       />
 
@@ -38,7 +38,7 @@ export const TextField = ({
           <Icon
             name={rightIcon}
             size={22}
-            color={Colors.mediumGray}
+            color={Colors.gray}
             style={{ marginRight: 10 }}
           />
         </Button>
