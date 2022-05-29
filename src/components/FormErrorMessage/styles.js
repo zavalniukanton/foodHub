@@ -4,10 +4,11 @@ import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   errorText: {
-    marginLeft: 15,
-    color: Colors.red,
-    fontSize: 16,
-    marginVertical: 8,
+    position: "absolute",
+    bottom: -20,
+    left: 10,
     fontWeight: "600",
+    fontSize: 16,
+    color: Colors.red,
   },
 });

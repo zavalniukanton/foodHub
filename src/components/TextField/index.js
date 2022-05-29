@@ -5,12 +5,15 @@ import { View } from "../View";
 import { Icon } from "../Icon";
 import { Button } from "../Button";
 import { Colors } from "../../theme/colors";
+import { FormErrorMessage } from "../FormErrorMessage";
 
 export const TextField = ({
   width = "100%",
   leftIconName,
   rightIcon,
   handlePasswordVisibility,
+  error,
+  visible,
   ...otherProps
 }) => {
   return (
@@ -23,11 +26,13 @@ export const TextField = ({
           style={{ marginRight: 10 }}
         />
       ) : null}
+
       <TextInput
         style={styles.input}
         placeholderTextColor={Colors.mediumGray}
         {...otherProps}
       />
+
       {rightIcon ? (
         <Button onPress={handlePasswordVisibility}>
           <Icon
@@ -38,6 +43,8 @@ export const TextField = ({
           />
         </Button>
       ) : null}
+
+      <FormErrorMessage error={error} visible={visible} />
     </View>
   );
 };

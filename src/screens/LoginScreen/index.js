@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Text } from "react-native";
+import { Text, Image } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
@@ -8,10 +7,9 @@ import { styles } from "./styles";
 import { auth } from "../../config/firebase";
 import { loginValidationSchema } from "../../validation/schemas";
 import { useTogglePasswordVisibility } from "../../hooks/useTogglePassordVisibility";
-import { View, TextField, FormErrorMessage, Button } from "../../components";
+import { View, TextField, Button } from "../../components";
 
 export const LoginScreen = ({ navigation }) => {
-  const [errorState, setErrorState] = useState("");
   const { passwordVisibility, handlePasswordVisibility, rightIcon } =
     useTogglePasswordVisibility();
 
@@ -25,8 +23,18 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <View isSafe style={styles.container}>
-      <KeyboardAwareScrollView enableOnAndroid={true}>
-        <Text style={styles.screenTitle}>Welcome back!</Text>
+      <Image
+        source={require("../../../assets/images/auth_bg.png")}
+        style={styles.decoration}
+      />
+
+      <KeyboardAwareScrollView
+        enableOnAndroid={true}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
+        <Text style={styles.screenTitle}>Login</Text>
 
         <Formik
           initialValues={{
@@ -52,12 +60,13 @@ export const LoginScreen = ({ navigation }) => {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 textContentType="emailAddress"
-                autoFocus={true}
                 value={values.email}
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
+                error={errors.email}
+                visible={touched.email}
               />
-              <FormErrorMessage error={errors.email} visible={touched.email} />
+
               <TextField
                 name="password"
                 leftIconName="key-variant"
@@ -71,15 +80,9 @@ export const LoginScreen = ({ navigation }) => {
                 value={values.password}
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
-              />
-              <FormErrorMessage
                 error={errors.password}
                 visible={touched.password}
               />
-
-              {errorState !== "" ? (
-                <FormErrorMessage error={errorState} visible={true} />
-              ) : null}
 
               <Button style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Login</Text>
@@ -91,13 +94,13 @@ export const LoginScreen = ({ navigation }) => {
         <Button
           style={styles.borderlessButtonContainer}
           borderless
-          title={"Create a new account?"}
+          title="Create a new account?"
           onPress={() => navigation.navigate("Register")}
         />
         <Button
           style={styles.borderlessButtonContainer}
           borderless
-          title={"Reset Password"}
+          title="Forgot the password"
           onPress={() => navigation.navigate("ResetPasswordOnEmail")}
         />
       </KeyboardAwareScrollView>

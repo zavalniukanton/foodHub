@@ -1,18 +1,15 @@
-import { useState } from "react";
-import { Text } from "react-native";
+import { Text, Image } from "react-native";
 import { Formik } from "formik";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { styles } from "./styles";
-import { View, TextField, Button, FormErrorMessage } from "../../components";
+import { View, TextField, Button } from "../../components";
 import { auth } from "../../config/firebase";
 import { useTogglePasswordVisibility } from "../../hooks/useTogglePassordVisibility";
 import { registerValidationSchema } from "../../validation/schemas";
 
 export const RegisterScreen = ({ navigation }) => {
-  const [errorState, setErrorState] = useState("");
-
   const {
     passwordVisibility,
     handlePasswordVisibility,
@@ -32,8 +29,18 @@ export const RegisterScreen = ({ navigation }) => {
 
   return (
     <View isSafe style={styles.container}>
-      <KeyboardAwareScrollView enableOnAndroid={true}>
-        <Text style={styles.screenTitle}>Create a new account!</Text>
+      <Image
+        source={require("../../../assets/images/auth_bg.png")}
+        style={styles.decoration}
+      />
+
+      <KeyboardAwareScrollView
+        enableOnAndroid={true}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
+        <Text style={styles.screenTitle}>Sign Up</Text>
 
         <Formik
           initialValues={{
@@ -60,12 +67,12 @@ export const RegisterScreen = ({ navigation }) => {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 textContentType="emailAddress"
-                autoFocus={true}
                 value={values.email}
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
+                error={errors.email}
+                visible={touched.email}
               />
-              <FormErrorMessage error={errors.email} visible={touched.email} />
 
               <TextField
                 name="password"
@@ -80,8 +87,6 @@ export const RegisterScreen = ({ navigation }) => {
                 value={values.password}
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
-              />
-              <FormErrorMessage
                 error={errors.password}
                 visible={touched.password}
               />
@@ -99,18 +104,12 @@ export const RegisterScreen = ({ navigation }) => {
                 value={values.confirmPassword}
                 onChangeText={handleChange("confirmPassword")}
                 onBlur={handleBlur("confirmPassword")}
-              />
-              <FormErrorMessage
                 error={errors.confirmPassword}
                 visible={touched.confirmPassword}
               />
 
-              {errorState !== "" ? (
-                <FormErrorMessage error={errorState} visible={true} />
-              ) : null}
-
               <Button style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Signup</Text>
+                <Text style={styles.buttonText}>Sign up</Text>
               </Button>
             </>
           )}
@@ -119,7 +118,7 @@ export const RegisterScreen = ({ navigation }) => {
         <Button
           style={styles.borderlessButtonContainer}
           borderless
-          title={"Already have an account?"}
+          title="Already have an account?"
           onPress={() => navigation.navigate("Login")}
         />
       </KeyboardAwareScrollView>

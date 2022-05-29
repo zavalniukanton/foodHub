@@ -28,8 +28,6 @@ export const HomeScreen = () => {
     });
   }, []);
 
-  console.log("restaurants", restaurants);
-
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
