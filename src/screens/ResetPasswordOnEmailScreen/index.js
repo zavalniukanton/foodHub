@@ -1,4 +1,5 @@
 import { Text, Image } from "react-native";
+import { useState } from "react";
 import { Formik } from "formik";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -10,6 +11,8 @@ import { auth } from "../../config/firebase";
 import { View, TextField, Button, GoBackButton } from "../../components";
 
 export const ResetPasswordOnEmailScreen = () => {
+  const [errorState, setErrorState] = useState("");
+
   const handleSendPasswordResetOnEmail = (values) => {
     const { email } = values;
 
@@ -68,6 +71,10 @@ export const ResetPasswordOnEmailScreen = () => {
                 error={errors.email}
                 visible={touched.email}
               />
+
+              {errorState ? (
+                <FormErrorMessage error={errorState} visible={true} />
+              ) : null}
 
               <Button style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Send Reset Email</Text>

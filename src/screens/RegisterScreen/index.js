@@ -2,7 +2,7 @@ import { Text, Image } from "react-native";
 import { Formik } from "formik";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import { styles } from "./styles";
 import { View, TextField, Button, GoBackButton } from "../../components";
@@ -12,6 +12,7 @@ import { useTogglePasswordVisibility } from "../../hooks/useTogglePassordVisibil
 import { registerValidationSchema } from "../../validation/schemas";
 
 export const RegisterScreen = () => {
+  const [errorState, setErrorState] = useState("");
   const {
     passwordVisibility,
     handlePasswordVisibility,
@@ -115,6 +116,10 @@ export const RegisterScreen = () => {
                 error={errors.confirmPassword}
                 visible={touched.confirmPassword}
               />
+
+              {errorState ? (
+                <FormErrorMessage error={errorState} visible={true} />
+              ) : null}
 
               <Button style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Sign up</Text>

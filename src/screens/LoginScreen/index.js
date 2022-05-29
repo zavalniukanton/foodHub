@@ -2,7 +2,7 @@ import { Text, Image } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import { styles } from "./styles";
 import { auth } from "../../config/firebase";
@@ -12,6 +12,7 @@ import { useTogglePasswordVisibility } from "../../hooks/useTogglePassordVisibil
 import { View, TextField, Button, GoBackButton } from "../../components";
 
 export const LoginScreen = () => {
+  const [errorState, setErrorState] = useState("");
   const { passwordVisibility, handlePasswordVisibility, rightIcon } =
     useTogglePasswordVisibility();
 
@@ -95,6 +96,10 @@ export const LoginScreen = () => {
                 error={errors.password}
                 visible={touched.password}
               />
+
+              {errorState ? (
+                <FormErrorMessage error={errorState} visible={true} />
+              ) : null}
 
               <Button style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Login</Text>
