@@ -2,16 +2,26 @@ import { Text, Image } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
+import { useCallback } from "react";
 
 import { styles } from "./styles";
 import { auth } from "../../config/firebase";
+import { navigation } from "../../navigation/navigationRef";
 import { loginValidationSchema } from "../../validation/schemas";
 import { useTogglePasswordVisibility } from "../../hooks/useTogglePassordVisibility";
-import { View, TextField, Button } from "../../components";
+import { View, TextField, Button, GoBackButton } from "../../components";
 
-export const LoginScreen = ({ navigation }) => {
+export const LoginScreen = () => {
   const { passwordVisibility, handlePasswordVisibility, rightIcon } =
     useTogglePasswordVisibility();
+
+  const handleResetPasswordOnEmailPress = useCallback(() => {
+    navigation.navigate("ResetPasswordOnEmail");
+  }, []);
+
+  const handleSignUpPress = useCallback(() => {
+    navigation.navigate("Register");
+  }, []);
 
   const handleLogin = (values) => {
     const { email, password } = values;
@@ -27,6 +37,8 @@ export const LoginScreen = ({ navigation }) => {
         source={require("../../../assets/images/auth_bg.png")}
         style={styles.decoration}
       />
+
+      <GoBackButton />
 
       <KeyboardAwareScrollView
         enableOnAndroid={true}
@@ -95,13 +107,13 @@ export const LoginScreen = ({ navigation }) => {
           style={styles.borderlessButtonContainer}
           borderless
           title="Create a new account?"
-          onPress={() => navigation.navigate("Register")}
+          onPress={handleSignUpPress}
         />
         <Button
           style={styles.borderlessButtonContainer}
           borderless
           title="Forgot the password"
-          onPress={() => navigation.navigate("ResetPasswordOnEmail")}
+          onPress={handleResetPasswordOnEmailPress}
         />
       </KeyboardAwareScrollView>
     </View>

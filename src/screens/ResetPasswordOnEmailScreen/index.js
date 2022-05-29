@@ -5,16 +5,16 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { styles } from "./styles";
 import { passwordResetOnMailSchema } from "../../validation/schemas";
+import { navigation } from "../../navigation/navigationRef";
 import { auth } from "../../config/firebase";
-import { View, TextField, Button } from "../../components";
+import { View, TextField, Button, GoBackButton } from "../../components";
 
-export const ResetPasswordOnEmailScreen = ({ navigation }) => {
+export const ResetPasswordOnEmailScreen = () => {
   const handleSendPasswordResetOnEmail = (values) => {
     const { email } = values;
 
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        console.log("Success: Password Reset Email sent.");
         navigation.navigate("Login");
       })
       .catch((error) => setErrorState(error.message));
@@ -26,6 +26,9 @@ export const ResetPasswordOnEmailScreen = ({ navigation }) => {
         source={require("../../../assets/images/auth_bg.png")}
         style={styles.decoration}
       />
+
+      <GoBackButton />
+
       <KeyboardAwareScrollView
         enableOnAndroid={true}
         keyboardShouldPersistTaps="handled"
@@ -72,13 +75,6 @@ export const ResetPasswordOnEmailScreen = ({ navigation }) => {
             </>
           )}
         </Formik>
-
-        <Button
-          style={styles.borderlessButtonContainer}
-          borderless
-          title="Go back to Login"
-          onPress={() => navigation.navigate("Login")}
-        />
       </KeyboardAwareScrollView>
     </View>
   );

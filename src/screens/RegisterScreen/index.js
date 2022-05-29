@@ -2,14 +2,16 @@ import { Text, Image } from "react-native";
 import { Formik } from "formik";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useCallback } from "react";
 
 import { styles } from "./styles";
-import { View, TextField, Button } from "../../components";
+import { View, TextField, Button, GoBackButton } from "../../components";
 import { auth } from "../../config/firebase";
+import { navigation } from "../../navigation/navigationRef";
 import { useTogglePasswordVisibility } from "../../hooks/useTogglePassordVisibility";
 import { registerValidationSchema } from "../../validation/schemas";
 
-export const RegisterScreen = ({ navigation }) => {
+export const RegisterScreen = () => {
   const {
     passwordVisibility,
     handlePasswordVisibility,
@@ -18,6 +20,10 @@ export const RegisterScreen = ({ navigation }) => {
     confirmPasswordIcon,
     confirmPasswordVisibility,
   } = useTogglePasswordVisibility();
+
+  const handleLoginPress = useCallback(() => {
+    navigation.navigate("Login");
+  }, []);
 
   const handleRegiter = (values) => {
     const { email, password } = values;
@@ -33,6 +39,8 @@ export const RegisterScreen = ({ navigation }) => {
         source={require("../../../assets/images/auth_bg.png")}
         style={styles.decoration}
       />
+
+      <GoBackButton />
 
       <KeyboardAwareScrollView
         enableOnAndroid={true}
@@ -119,7 +127,7 @@ export const RegisterScreen = ({ navigation }) => {
           style={styles.borderlessButtonContainer}
           borderless
           title="Already have an account?"
-          onPress={() => navigation.navigate("Login")}
+          onPress={handleLoginPress}
         />
       </KeyboardAwareScrollView>
     </View>

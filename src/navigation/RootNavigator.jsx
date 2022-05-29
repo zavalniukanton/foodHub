@@ -7,6 +7,7 @@ import { MainStack } from "./MainStack";
 import { AuthContext } from "../context/authContext";
 import { LoadingIndicator } from "../components";
 import { auth } from "../config/firebase";
+import { navigationRef } from "./navigationRef";
 
 export const RootNavigator = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -28,7 +29,7 @@ export const RootNavigator = () => {
   }
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       {user ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
