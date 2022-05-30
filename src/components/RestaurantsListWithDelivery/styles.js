@@ -5,7 +5,6 @@ import { Colors } from "../../theme/colors";
 export const styles = StyleSheet.create({
   card: {
     marginBottom: 40,
-    padding: 6,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Colors.gray,

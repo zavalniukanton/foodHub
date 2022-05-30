@@ -9,10 +9,9 @@ export const RestaurantsListWithDelivery = ({ data }) => {
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
       renderItem={({ item }) => {
-        console.log("item.image", item.image);
         return (
           <Pressable style={styles.card}>
-            <Image source={{ uri: item.logo }} style={styles.image} />
+            <Image source={{ uri: item.image }} style={styles.image} />
 
             <Text style={styles.buttonText}>{item.name}</Text>
           </Pressable>

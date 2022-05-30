@@ -1,4 +1,4 @@
-import { Text, FlatList, Pressable } from "react-native";
+import { Text, FlatList, Pressable, Image } from "react-native";
 
 import { styles } from "./styles";
 
@@ -11,6 +11,8 @@ export const RestaurantsListWithPickup = ({ data }) => {
       renderItem={({ item }) => {
         return (
           <Pressable style={styles.card}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+
             <Text style={styles.buttonText}>{item.name}</Text>
           </Pressable>
         );

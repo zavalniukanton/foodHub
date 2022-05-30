@@ -4,12 +4,10 @@ import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
-    height: 100, // TODO: delete
     marginBottom: 40,
-    padding: 6,
     borderRadius: 10,
-    // borderWidth: 1,
-    // borderColor: Colors.border,
+    borderWidth: 1,
+    borderColor: Colors.gray,
     backgroundColor: Colors.white,
     overflow: "hidden",
     shadowColor: Colors.black,
@@ -20,5 +18,9 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 25,
+  },
+  image: {
+    width: "100%",
+    height: 75,
   },
 });
