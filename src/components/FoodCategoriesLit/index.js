@@ -2,7 +2,11 @@ import { Text, FlatList, Pressable } from "react-native";
 
 import { styles } from "./styles";
 
-export const FoodCategoriesList = ({ data, onSelectCategory }) => {
+export const FoodCategoriesList = ({
+  data,
+  selectedCategory,
+  onSelectCategory,
+}) => {
   return (
     <FlatList
       data={data}
@@ -12,7 +16,7 @@ export const FoodCategoriesList = ({ data, onSelectCategory }) => {
       renderItem={({ item }) => {
         return (
           <Pressable
-            style={styles.button}
+            style={styles.button(selectedCategory, item.name)}
             onPress={() => onSelectCategory(item.name)}
           >
             <Text style={styles.buttonText}>{item.name}</Text>

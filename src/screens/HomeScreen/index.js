@@ -111,6 +111,7 @@ export const HomeScreen = () => {
       <View style={styles.categoriesContainer}>
         <FoodCategoriesList
           data={categoriesToDisplay}
+          selectedCategory={selectedCategory}
           onSelectCategory={handleFoodCategoryClick}
         />
       </View>
