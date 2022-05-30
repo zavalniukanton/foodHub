@@ -5,3 +5,4 @@ export * from "./TextField";
 export * from "./View";
 export * from "./LoadingIndicator";
 export * from "./GoBackButton";
+export * from "./FoodCategoriesLit";

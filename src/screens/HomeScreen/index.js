@@ -1,38 +1,57 @@
-import { View, Text, Button } from "react-native";
-import { signOut } from "firebase/auth";
+import { Text } from "react-native";
 import { useState, useEffect } from "react";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  addDoc,
-} from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
 import { styles } from "./styles";
-import { auth, db } from "../../config/firebase";
+import { db } from "../../config/firebase";
+import { View, Button, FoodCategoriesList } from "../../components";
 
 export const HomeScreen = () => {
-  const [restaurants, setRestaurants] = useState([]);
+  const [activeTab, setActiveTab] = useState("delivery");
+  const [foodCategories, setFoodCategories] = useState([]);
 
-  const handleLogout = () => {
-    signOut(auth).catch((error) => console.log("Error logging out: ", error));
-  };
+  const categoriesToDisplay = foodCategories.filter(
+    (category, index, array) => category.id < 7 || index === array.length - 1
+  );
 
   useEffect(() => {
-    const restaurantsRef = collection(db, "restaurants");
-    const q = query(restaurantsRef, orderBy("id"));
+    const foodategoriesRef = collection(db, "foodCategories");
+    const q = query(foodategoriesRef, orderBy("id"));
 
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setRestaurants(querySnapshot.docs.map((doc) => doc.data()));
+    onSnapshot(q, (querySnapshot) => {
+      setFoodCategories(querySnapshot.docs.map((doc) => doc.data()));
     });
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
+  const handleDeliveryTabClick = () => {
+    setActiveTab("delivery");
+  };
 
-      <Button title="Sign Out" onPress={handleLogout} />
+  const handlePickupTabClick = () => {
+    setActiveTab("pickup");
+  };
+
+  return (
+    <View isSafe style={styles.container}>
+      <View style={styles.tabsContainer}>
+        <Button
+          style={styles.tab(activeTab === "delivery")}
+          onPress={handleDeliveryTabClick}
+        >
+          <Text style={styles.tabName(activeTab === "delivery")}>Delivery</Text>
+        </Button>
+
+        <Button
+          style={styles.tab(activeTab === "pickup")}
+          onPress={handlePickupTabClick}
+        >
+          <Text style={styles.tabName(activeTab === "pickup")}>Pick up</Text>
+        </Button>
+      </View>
+
+      <FoodCategoriesList data={categoriesToDisplay} />
+
+      {activeTab === "delivery" ? <Text>Delivery</Text> : <Text>Pick up</Text>}
     </View>
   );
 };
