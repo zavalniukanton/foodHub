@@ -52,10 +52,12 @@ export const HomeScreen = () => {
 
   const handleDeliveryTabClick = () => {
     setActiveTab("delivery");
+    setSelectedCategory("All");
   };
 
   const handlePickupTabClick = () => {
     setActiveTab("pickup");
+    setSelectedCategory("All");
   };
 
   const handleFoodCategoryClick = (category) => {
