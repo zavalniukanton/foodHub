@@ -51,6 +51,24 @@ export const HomeScreen = () => {
     setSelectedCategory(category);
   };
 
+  const showRestaurantsList = (category) => {
+    if (category === "All") {
+      return <RestaurantsListWithDelivery data={restaurants} />;
+    }
+
+    if (category === "Show more") {
+      return <Text>Modal with all categories is opened</Text>;
+    }
+
+    return (
+      <RestaurantsListWithDelivery
+        data={restaurants.filter((restaurant) =>
+          restaurant.category.includes(category)
+        )}
+      />
+    );
+  };
+
   return (
     <View isSafe style={styles.container}>
       <View style={styles.tabsContainer}>
@@ -77,7 +95,7 @@ export const HomeScreen = () => {
       </View>
 
       {activeTab === "delivery" ? (
-        <RestaurantsListWithDelivery data={restaurants} />
+        showRestaurantsList(selectedCategory)
       ) : (
         <Text>Pick up</Text>
       )}
