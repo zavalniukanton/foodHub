@@ -4,7 +4,6 @@ import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   button: {
-    height: 25,
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10,

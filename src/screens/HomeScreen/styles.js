@@ -38,4 +38,8 @@ export const styles = StyleSheet.create({
     lineHeight: 14,
     color: activeTab ? Colors.white : Colors.orange,
   }),
+  categoriesContainer: {
+    height: 25,
+    marginBottom: 30,
+  },
 });

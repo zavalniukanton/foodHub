@@ -6,3 +6,4 @@ export * from "./View";
 export * from "./LoadingIndicator";
 export * from "./GoBackButton";
 export * from "./FoodCategoriesLit";
+export * from "./RestaurantsListWithDelivery";

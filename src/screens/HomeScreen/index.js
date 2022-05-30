@@ -4,11 +4,18 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
 import { styles } from "./styles";
 import { db } from "../../config/firebase";
-import { View, Button, FoodCategoriesList } from "../../components";
+import {
+  View,
+  Button,
+  FoodCategoriesList,
+  RestaurantsListWithDelivery,
+} from "../../components";
 
 export const HomeScreen = () => {
   const [activeTab, setActiveTab] = useState("delivery");
   const [foodCategories, setFoodCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [restaurants, setRestaurants] = useState([]);
 
   const categoriesToDisplay = foodCategories.filter(
     (category, index, array) => category.id < 7 || index === array.length - 1
@@ -23,12 +30,25 @@ export const HomeScreen = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const restaurantsRef = collection(db, "restaurants");
+    const q = query(restaurantsRef, orderBy("id"));
+
+    onSnapshot(q, (querySnapshot) => {
+      setRestaurants(querySnapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
+
   const handleDeliveryTabClick = () => {
     setActiveTab("delivery");
   };
 
   const handlePickupTabClick = () => {
     setActiveTab("pickup");
+  };
+
+  const handleFoodCategoryClick = (category) => {
+    setSelectedCategory(category);
   };
 
   return (
@@ -49,9 +69,18 @@ export const HomeScreen = () => {
         </Button>
       </View>
 
-      <FoodCategoriesList data={categoriesToDisplay} />
+      <View style={styles.categoriesContainer}>
+        <FoodCategoriesList
+          data={categoriesToDisplay}
+          onSelectCategory={handleFoodCategoryClick}
+        />
+      </View>
 
-      {activeTab === "delivery" ? <Text>Delivery</Text> : <Text>Pick up</Text>}
+      {activeTab === "delivery" ? (
+        <RestaurantsListWithDelivery data={restaurants} />
+      ) : (
+        <Text>Pick up</Text>
+      )}
     </View>
   );
 };
