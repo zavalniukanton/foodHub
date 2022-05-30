@@ -9,13 +9,15 @@ import {
   Button,
   FoodCategoriesList,
   RestaurantsListWithDelivery,
+  RestaurantsListWithPickup,
 } from "../../components";
 
 export const HomeScreen = () => {
   const [activeTab, setActiveTab] = useState("delivery");
   const [foodCategories, setFoodCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurantsWithDelivery, setRestaurantsWithDelivery] = useState([]);
+  const [restaurantsWithPickup, setRestaurantsWithPickup] = useState([]);
 
   const categoriesToDisplay = foodCategories.filter(
     (category, index, array) => category.id < 7 || index === array.length - 1
@@ -31,11 +33,20 @@ export const HomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    const restaurantsRef = collection(db, "restaurants");
-    const q = query(restaurantsRef, orderBy("id"));
+    const restaurantsWithDeliveryRef = collection(db, "restaurants");
+    const q = query(restaurantsWithDeliveryRef, orderBy("id"));
 
     onSnapshot(q, (querySnapshot) => {
-      setRestaurants(querySnapshot.docs.map((doc) => doc.data()));
+      setRestaurantsWithDelivery(querySnapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
+
+  useEffect(() => {
+    const restaurantsWithPickupRef = collection(db, "restaurantsWithPickup");
+    const q = query(restaurantsWithPickupRef, orderBy("id"));
+
+    onSnapshot(q, (querySnapshot) => {
+      setRestaurantsWithPickup(querySnapshot.docs.map((doc) => doc.data()));
     });
   }, []);
 
@@ -53,16 +64,26 @@ export const HomeScreen = () => {
 
   const showRestaurantsList = (category) => {
     if (category === "All") {
-      return <RestaurantsListWithDelivery data={restaurants} />;
+      return activeTab === "delivery" ? (
+        <RestaurantsListWithDelivery data={restaurantsWithDelivery} />
+      ) : (
+        <RestaurantsListWithPickup data={restaurantsWithPickup} />
+      );
     }
 
     if (category === "Show more") {
       return <Text>Modal with all categories is opened</Text>;
     }
 
-    return (
+    return activeTab === "delivery" ? (
       <RestaurantsListWithDelivery
-        data={restaurants.filter((restaurant) =>
+        data={restaurantsWithDelivery.filter((restaurant) =>
+          restaurant.category.includes(category)
+        )}
+      />
+    ) : (
+      <RestaurantsListWithPickup
+        data={restaurantsWithPickup.filter((restaurant) =>
           restaurant.category.includes(category)
         )}
       />
@@ -94,11 +115,7 @@ export const HomeScreen = () => {
         />
       </View>
 
-      {activeTab === "delivery" ? (
-        showRestaurantsList(selectedCategory)
-      ) : (
-        <Text>Pick up</Text>
-      )}
+      {showRestaurantsList(selectedCategory)}
     </View>
   );
 };
