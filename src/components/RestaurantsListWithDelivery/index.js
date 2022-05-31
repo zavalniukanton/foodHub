@@ -40,7 +40,7 @@ export const RestaurantsListWithDelivery = ({ data }) => {
               <View style={styles.deliveryInfo}>
                 <Icon
                   name="clock"
-                  color={Colors.gray}
+                  color={Colors.blue}
                   size={18}
                   style={styles.deliveryInfoIcon}
                 />
@@ -50,7 +50,7 @@ export const RestaurantsListWithDelivery = ({ data }) => {
 
                 <Icon
                   name="bike"
-                  color={Colors.gray}
+                  color={Colors.blue}
                   size={18}
                   style={styles.deliveryInfoIcon}
                 />
@@ -60,7 +60,7 @@ export const RestaurantsListWithDelivery = ({ data }) => {
 
                 <Icon
                   name="cart"
-                  color={Colors.gray}
+                  color={Colors.blue}
                   size={18}
                   style={styles.deliveryInfoIcon}
                 />

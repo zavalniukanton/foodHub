@@ -38,13 +38,13 @@ export const RestaurantsListWithPickup = ({ data }) => {
               </View>
 
               <View style={styles.deliveryInfo}>
-                <Icon name="walk" color={Colors.gray} size={18} />
+                <Icon name="walk" color={Colors.blue} size={18} />
                 <Text style={styles.deliveryInfoText}>{item.distance} m</Text>
 
-                <Icon name="map-marker" color={Colors.gray} size={18} />
+                <Icon name="map-marker" color={Colors.blue} size={18} />
                 <Text style={styles.deliveryInfoText}>{item.address}</Text>
 
-                <Icon name="clock" color={Colors.gray} size={18} />
+                <Icon name="clock" color={Colors.blue} size={18} />
                 <Text style={styles.deliveryInfoText}>
                   {item.startAt} - {item.stopAt}
                 </Text>

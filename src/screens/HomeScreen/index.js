@@ -99,14 +99,14 @@ export const HomeScreen = () => {
           style={styles.tab(activeTab === "delivery")}
           onPress={handleDeliveryTabClick}
         >
-          <Text style={styles.tabName(activeTab === "delivery")}>Delivery</Text>
+          <Text style={styles.tabName}>Delivery</Text>
         </Button>
 
         <Button
           style={styles.tab(activeTab === "pickup")}
           onPress={handlePickupTabClick}
         >
-          <Text style={styles.tabName(activeTab === "pickup")}>Pick up</Text>
+          <Text style={styles.tabName}>Pick up</Text>
         </Button>
       </View>
 
