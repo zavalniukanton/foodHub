@@ -9,8 +9,6 @@ export const RestaurantScreen = ({ route }) => {
     params: { restaurant },
   } = route;
 
-  console.log("restaurant.logo", restaurant.logo); // TODO: logo kawałek
-
   return (
     <View isSafe style={styles.container}>
       <ImageBackground style={styles.header} source={{ uri: restaurant.image }}>

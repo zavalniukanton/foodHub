@@ -50,6 +50,7 @@ export const styles = StyleSheet.create({
   options: {
     flexDirection: "row",
     alignItems: "center",
+    flexWrap: "wrap",
     marginTop: 10,
   },
   choiseOf: {
