@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     marginVertical: 20,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: Colors.gray,
+    borderColor: Colors.border,
     backgroundColor: Colors.white,
   }),
   input: { flex: 1, width: "100%", fontSize: 18, color: Colors.black },

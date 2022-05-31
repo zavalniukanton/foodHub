@@ -1,7 +1,7 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
 
 import { styles } from "./styles";
-import { GoBackButton, Icon, View } from "../../components";
+import { GoBackButton, Icon, MenuList, View } from "../../components";
 import { Colors } from "../../theme/colors";
 
 export const RestaurantScreen = ({ route }) => {
@@ -9,7 +9,7 @@ export const RestaurantScreen = ({ route }) => {
     params: { restaurant },
   } = route;
 
-  console.log("restaurant.logo", restaurant.logo);
+  console.log("restaurant.logo", restaurant.logo); // TODO: logo kawałek
 
   return (
     <View isSafe style={styles.container}>
@@ -23,10 +23,10 @@ export const RestaurantScreen = ({ route }) => {
       <View style={styles.titleSection}>
         <Text style={styles.restaurantName}>{restaurant.name}</Text>
         <Pressable style={styles.actionButton}>
-          <Icon name="information-variant" size={24} color={Colors.black} />
+          <Icon name="information-variant" size={24} color={Colors.blue} />
         </Pressable>
         <Pressable style={styles.actionButton}>
-          <Icon name="cards-heart-outline" size={24} color={Colors.black} />
+          <Icon name="cards-heart-outline" size={24} color={Colors.blue} />
         </Pressable>
       </View>
 
@@ -39,6 +39,12 @@ export const RestaurantScreen = ({ route }) => {
         />
         <Text style={styles.rating}>{restaurant.rating}</Text>
         <Text style={styles.review}>{restaurant.review} reviews</Text>
+      </View>
+
+      <Text style={styles.menu}>Menu</Text>
+
+      <View style={styles.menuSection}>
+        <MenuList data={restaurant.menu} />
       </View>
     </View>
   );

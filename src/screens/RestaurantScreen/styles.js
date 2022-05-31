@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   titleSection: {
-    marginTop: 100,
+    marginTop: 80,
     paddingHorizontal: 22,
     flexDirection: "row",
     alignItems: "flex-start",
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   restaurantName: {
     marginRight: "auto",
     fontWeight: "700",
-    fontSize: 24,
+    fontSize: 26,
     color: Colors.black,
   },
   actionButton: {
@@ -62,4 +62,15 @@ export const styles = StyleSheet.create({
     color: Colors.black,
   },
   review: { fontWeight: "500", fontSize: 15, color: Colors.orange },
+  menu: {
+    marginVertical: 20,
+    paddingVertical: 10,
+    paddingLeft: 22,
+    fontWeight: "500",
+    fontSize: 20,
+    backgroundColor: Colors.mistyrose,
+  },
+  menuSection: {
+    paddingHorizontal: 22,
+  },
 });

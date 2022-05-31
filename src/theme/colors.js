@@ -8,5 +8,6 @@ export const Colors = {
   border: "#bebebe",
   red: "#fc5c65",
   green: "#4ee476",
+  mistyrose: "#ffe4e1",
   bg_gradient: ["rgba(73, 77, 99, 0)", "#191b2f"],
 };

@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: Colors.gray,
+    borderColor: Colors.border,
     backgroundColor: Colors.white,
     overflow: "hidden",
     shadowColor: Colors.black,

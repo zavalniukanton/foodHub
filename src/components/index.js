@@ -8,3 +8,4 @@ export * from "./GoBackButton";
 export * from "./FoodCategoriesLit";
 export * from "./RestaurantsListWithDelivery";
 export * from "./RestaurantsListWithPickUp";
+export * from "./MenuList";
