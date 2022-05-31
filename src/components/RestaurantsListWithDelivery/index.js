@@ -49,7 +49,7 @@ export const RestaurantsListWithDelivery = ({ data }) => {
                 </Text>
 
                 <Icon
-                  name="bicycle"
+                  name="bike"
                   color={Colors.gray}
                   size={18}
                   style={styles.deliveryInfoIcon}

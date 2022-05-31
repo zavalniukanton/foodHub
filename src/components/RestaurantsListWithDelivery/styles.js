@@ -66,9 +66,9 @@ export const styles = StyleSheet.create({
   },
   deliveryInfoIcon: { marginRight: 4 },
   deliveryInfoText: {
-    marginRight: 10,
+    marginRight: 15,
     fontWeight: "400",
-    fontSize: 15,
+    fontSize: 14,
     color: Colors.gray,
   },
 });
