@@ -19,7 +19,9 @@ export const FoodCategoriesList = ({
             style={styles.button(selectedCategory, item.name)}
             onPress={() => onSelectCategory(item.name)}
           >
-            <Text style={styles.buttonText}>{item.name}</Text>
+            <Text style={styles.buttonText(selectedCategory, item.name)}>
+              {item.name}
+            </Text>
           </Pressable>
         );
       }}
