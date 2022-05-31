@@ -4,6 +4,7 @@ import { styles } from "./styles";
 import { View } from "../View";
 import { Icon } from "../Icon";
 import { Colors } from "../../theme/colors";
+import { navigation } from "../../navigation/navigationRef";
 
 export const RestaurantsListWithDelivery = ({ data }) => {
   return (
@@ -12,8 +13,15 @@ export const RestaurantsListWithDelivery = ({ data }) => {
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
       renderItem={({ item }) => {
+        const handleOnCardPress = () => {
+          navigation.navigate("Restaurant", {
+            restaurantId: item.id,
+            restaurant: item,
+          });
+        };
+
         return (
-          <Pressable style={styles.card}>
+          <Pressable style={styles.card} onPress={handleOnCardPress}>
             <Image source={{ uri: item.image }} style={styles.image} />
 
             <View style={styles.cardContent}>

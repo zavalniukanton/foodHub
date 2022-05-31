@@ -5,7 +5,7 @@ export const Colors = {
   white: "#ffffff",
   white_20: "rgba(255, 255, 255, 0.2)",
   gray: "#6e6869",
-  border: "#eeeeee",
+  border: "#bebebe",
   red: "#fc5c65",
   green: "#4ee476",
   bg_gradient: ["rgba(73, 77, 99, 0)", "#191b2f"],

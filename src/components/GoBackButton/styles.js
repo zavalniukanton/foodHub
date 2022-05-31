@@ -3,12 +3,10 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
-  button: (pressed, top, left) => ({
+  button: (pressed) => ({
     width: 38,
     height: 38,
     position: "absolute",
-    top,
-    left,
     backgroundColor: Colors.white,
     justifyContent: "center",
     alignItems: "center",
