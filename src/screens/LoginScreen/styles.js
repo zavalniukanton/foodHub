@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 80,
   },
+  goBackButton: { top: 50, left: 25 },
   content: { paddingHorizontal: 22, paddingTop: 100 },
   screenTitle: {
     fontSize: 36,

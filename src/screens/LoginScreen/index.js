@@ -39,7 +39,7 @@ export const LoginScreen = () => {
         style={styles.decoration}
       />
 
-      <GoBackButton />
+      <GoBackButton style={styles.goBackButton} />
 
       <KeyboardAwareScrollView
         enableOnAndroid={true}

@@ -30,7 +30,7 @@ export const ResetPasswordOnEmailScreen = () => {
         style={styles.decoration}
       />
 
-      <GoBackButton />
+      <GoBackButton style={styles.goBackButton} />
 
       <KeyboardAwareScrollView
         enableOnAndroid={true}
