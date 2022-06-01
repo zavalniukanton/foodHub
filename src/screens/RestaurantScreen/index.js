@@ -20,10 +20,10 @@ export const RestaurantScreen = ({ route }) => {
 
       <View style={styles.titleSection}>
         <Text style={styles.restaurantName}>{restaurant.name}</Text>
-        <Pressable style={styles.actionButton}>
+        <Pressable style={styles.actionButton("info")}>
           <Icon name="information-variant" size={24} color={Colors.blue} />
         </Pressable>
-        <Pressable style={styles.actionButton}>
+        <Pressable style={styles.actionButton("heart")}>
           <Icon name="cards-heart-outline" size={24} color={Colors.blue} />
         </Pressable>
       </View>
@@ -32,7 +32,7 @@ export const RestaurantScreen = ({ route }) => {
         <Icon
           name="star"
           color={Colors.orange}
-          size={24}
+          size={20}
           style={{ marginRight: 4 }}
         />
         <Text style={styles.rating}>{restaurant.rating}</Text>

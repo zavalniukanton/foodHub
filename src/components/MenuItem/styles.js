@@ -4,8 +4,6 @@ import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
-    paddingHorizontal: 10,
-    paddingVertical: 14,
     borderWidth: 1,
     borderColor: Colors.border,
     borderRadius: 10,
@@ -19,6 +17,10 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  pressablePart: {
+    paddingHorizontal: 10,
+    paddingVertical: 14,
   },
   foodName: {
     fontWeight: "600",
@@ -35,6 +37,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderLeftWidth: 1,
     borderBottomWidth: 1,
+    borderBottomLeftRadius: 4,
     borderColor: Colors.border,
   },
   infoContainer: {
@@ -76,5 +79,65 @@ export const styles = StyleSheet.create({
     width: 80,
     height: 80,
     marginLeft: 10,
+  },
+  optionsContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 14,
+    backgroundColor: Colors.mistyrose,
+  },
+  optionsTitle: {
+    fontWeight: "500",
+    fontSize: 14,
+    color: Colors.black,
+  },
+  option: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 6,
+  },
+  checkbox: {
+    marginRight: 10,
+    height: 18,
+    width: 18,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.white,
+  },
+  checked: {
+    width: 8,
+    height: 8,
+    borderRadius: 100,
+    backgroundColor: Colors.orange,
+  },
+  optionsName: {
+    marginRight: "auto",
+    fontWeight: "400",
+    fontSize: 14,
+    color: Colors.black,
+  },
+  optionPrice: {
+    fontWeight: "500",
+    fontSize: 14,
+    color: Colors.black,
+  },
+  actionContainer: {
+    marginTop: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  payButton: {
+    height: 30,
+    paddingHorizontal: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    backgroundColor: Colors.blue,
+  },
+  payButtonText: {
+    color: Colors.white,
   },
 });

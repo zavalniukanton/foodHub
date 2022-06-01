@@ -9,3 +9,4 @@ export * from "./FoodCategoriesLit";
 export * from "./RestaurantsList";
 export * from "./MenuList";
 export * from "./MenuItem";
+export * from "./AmountSelect";

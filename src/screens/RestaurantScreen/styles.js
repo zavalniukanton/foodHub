@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
   },
   titleSection: {
     marginTop: 80,
+    marginBottom: 10,
     paddingHorizontal: 22,
     flexDirection: "row",
     alignItems: "flex-start",
@@ -39,17 +40,22 @@ export const styles = StyleSheet.create({
   restaurantName: {
     marginRight: "auto",
     fontWeight: "700",
-    fontSize: 26,
+    fontSize: 30,
     color: Colors.black,
   },
-  actionButton: {
-    width: 50,
-    height: 50,
+  actionButton: (type) => ({
+    width: 45,
+    height: 45,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
+    borderBottomLeftRadius: type === "info" ? 4 : 0,
+    borderTopLeftRadius: type === "info" ? 4 : 0,
+    borderTopRightRadius: type === "heart" ? 4 : 0,
+    borderBottomRightRadius: type === "heart" ? 4 : 0,
+    borderLeftWidth: type === "heart" ? 0 : 1,
     borderColor: Colors.border,
-  },
+  }),
   ratingSection: {
     flexDirection: "row",
     alignItems: "center",
@@ -59,9 +65,14 @@ export const styles = StyleSheet.create({
     marginRight: 10,
     fontWeight: "500",
     fontSize: 15,
+
     color: Colors.black,
   },
-  review: { fontWeight: "500", fontSize: 15, color: Colors.orange },
+  review: {
+    fontWeight: "500",
+    fontSize: 15,
+    color: Colors.orange,
+  },
   menu: {
     marginVertical: 20,
     paddingVertical: 10,
