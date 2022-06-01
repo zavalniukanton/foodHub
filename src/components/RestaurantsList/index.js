@@ -6,7 +6,7 @@ import { Icon } from "../Icon";
 import { Colors } from "../../theme/colors";
 import { navigation } from "../../navigation/navigationRef";
 
-export const RestaurantsListWithDelivery = ({ data }) => {
+export const RestaurantsList = ({ data }) => {
   return (
     <FlatList
       data={data}
@@ -46,35 +46,47 @@ export const RestaurantsListWithDelivery = ({ data }) => {
               </View>
 
               <View style={styles.deliveryInfo}>
-                <Icon
-                  name="clock"
-                  color={Colors.blue}
-                  size={18}
-                  style={styles.deliveryInfoIcon}
-                />
-                <Text style={styles.deliveryInfoText}>
-                  {item.deliveryMinTime} - {item.deliveryMaxTime} min
-                </Text>
+                {item.isDelivery ? (
+                  <>
+                    <Icon
+                      name="clock"
+                      color={Colors.blue}
+                      size={18}
+                      style={styles.deliveryInfoIcon}
+                    />
+                    <Text style={styles.deliveryInfoText}>
+                      {item.deliveryMinTime} - {item.deliveryMaxTime} min
+                    </Text>
+                    <Icon
+                      name="bike"
+                      color={Colors.blue}
+                      size={18}
+                      style={styles.deliveryInfoIcon}
+                    />
+                    <Text style={styles.deliveryInfoText}>
+                      {item.deliveryPrice} zł
+                    </Text>
+                    <Icon
+                      name="cart"
+                      color={Colors.blue}
+                      size={18}
+                      style={styles.deliveryInfoIcon}
+                    />
+                    <Text style={styles.deliveryInfoText}>
+                      Min. {item.minOrder} zł
+                    </Text>
+                  </>
+                ) : (
+                  <>
+                    <Icon name="walk" color={Colors.blue} size={18} />
+                    <Text style={styles.deliveryInfoText}>
+                      {item.distance} m
+                    </Text>
 
-                <Icon
-                  name="bike"
-                  color={Colors.blue}
-                  size={18}
-                  style={styles.deliveryInfoIcon}
-                />
-                <Text style={styles.deliveryInfoText}>
-                  {item.deliveryPrice} zł
-                </Text>
-
-                <Icon
-                  name="cart"
-                  color={Colors.blue}
-                  size={18}
-                  style={styles.deliveryInfoIcon}
-                />
-                <Text style={styles.deliveryInfoText}>
-                  Min. {item.minOrder} zł
-                </Text>
+                    <Icon name="map-marker" color={Colors.blue} size={18} />
+                    <Text style={styles.deliveryInfoText}>{item.address}</Text>
+                  </>
+                )}
               </View>
             </View>
           </Pressable>

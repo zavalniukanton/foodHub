@@ -8,8 +8,7 @@ import {
   View,
   Button,
   FoodCategoriesList,
-  RestaurantsListWithDelivery,
-  RestaurantsListWithPickup,
+  RestaurantsList,
 } from "../../components";
 
 export const HomeScreen = () => {
@@ -67,9 +66,9 @@ export const HomeScreen = () => {
   const showRestaurantsList = (category) => {
     if (category === "All") {
       return activeTab === "delivery" ? (
-        <RestaurantsListWithDelivery data={restaurantsWithDelivery} />
+        <RestaurantsList data={restaurantsWithDelivery} />
       ) : (
-        <RestaurantsListWithPickup data={restaurantsWithPickup} />
+        <RestaurantsList data={restaurantsWithPickup} />
       );
     }
 
@@ -78,13 +77,13 @@ export const HomeScreen = () => {
     }
 
     return activeTab === "delivery" ? (
-      <RestaurantsListWithDelivery
+      <RestaurantsList
         data={restaurantsWithDelivery.filter((restaurant) =>
           restaurant.category.includes(category)
         )}
       />
     ) : (
-      <RestaurantsListWithPickup
+      <RestaurantsList
         data={restaurantsWithPickup.filter((restaurant) =>
           restaurant.category.includes(category)
         )}
