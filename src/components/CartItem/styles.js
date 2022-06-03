@@ -4,23 +4,40 @@ import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
-    borderWidth: 1,
+    marginBottom: 20,
+    paddingBottom: 16,
+    paddingHorizontal: 2,
+    borderBottomWidth: 1,
     borderColor: Colors.border,
-    borderRadius: 10,
-    backgroundColor: Colors.white,
     overflow: "hidden",
-    shadowColor: Colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+  },
+  cardHeader: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
   },
   itemName: {
+    flexShrink: 1,
     fontWeight: "600",
     fontSize: 16,
     color: Colors.black,
+  },
+  itemPrice: {
+    marginLeft: "auto",
+    fontWeight: "500",
+    fontSize: 16,
+    color: Colors.black,
+  },
+  optionName: {
+    marginRight: 10,
+    marginBottom: 10,
+    fontWeight: "600",
+    fontStyle: "italic",
+    color: Colors.gray,
+    textDecorationLine: "underline",
+  },
+  noOptions: {
+    color: Colors.border,
   },
 });
