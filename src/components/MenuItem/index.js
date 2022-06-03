@@ -1,5 +1,5 @@
 import { Text, Pressable, Image } from "react-native";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 
 import { styles } from "./styles";
 import { Colors } from "../../theme/colors";
@@ -8,12 +8,25 @@ import { View } from "../View";
 import { AmountSelect } from "../AmountSelect";
 import { Button } from "../Button";
 
-export const MenuItem = ({ item }) => {
+export const MenuItem = ({ item, onAddtoCart }) => {
   const [isCardPresed, setIsCardPressed] = useState(false);
   const [foodState, setFoodState] = useState({
     amount: 1,
     selectedOptions: [],
   });
+
+  const totalPriceForItem = useMemo(
+    () =>
+      (
+        foodState.amount *
+        (item.price +
+          foodState.selectedOptions.reduce(
+            (total, { price }) => total + price,
+            0
+          ))
+      ).toFixed(2),
+    [foodState.amount, foodState.selectedOptions]
+  );
 
   const toggleOnCardPress = () => {
     setIsCardPressed((prevState) => !prevState);
@@ -53,22 +66,14 @@ export const MenuItem = ({ item }) => {
     setFoodState((prevState) => ({ ...prevState, amount: newAmount }));
   };
 
-  const onPayButtonPress = () => {
+  const onPayButtonPress = useCallback(() => {
+    onAddtoCart({
+      name: item.name,
+      ...foodState,
+      totalPrice: totalPriceForItem,
+    });
     toggleOnCardPress();
-  };
-
-  const totalPriceForItem = useMemo(
-    () =>
-      (
-        foodState.amount *
-        (item.price +
-          foodState.selectedOptions.reduce(
-            (total, { price }) => total + price,
-            0
-          ))
-      ).toFixed(2),
-    [foodState.amount, foodState.selectedOptions]
-  );
+  }, [foodState]);
 
   return (
     <View style={styles.card}>

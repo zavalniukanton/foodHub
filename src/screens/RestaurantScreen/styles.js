@@ -84,4 +84,47 @@ export const styles = StyleSheet.create({
   menuSection: {
     paddingHorizontal: 22,
   },
+  cartBanner: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 60,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 22,
+
+    backgroundColor: Colors.blue,
+  },
+  cartIcon: {
+    position: "absolute",
+    left: 22,
+  },
+  cartBadge: {
+    position: "absolute",
+    left: 45,
+    bottom: 10,
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
+    backgroundColor: Colors.orange,
+  },
+  cartBadgeText: {
+    fontWeight: "500",
+    color: Colors.white,
+  },
+  cartBannerText: {
+    fontWeight: "500",
+    fontSize: 16,
+    color: Colors.white,
+  },
+  orderPrice: {
+    marginLeft: 6,
+    fontWeight: "500",
+    fontSize: 16,
+    color: Colors.white,
+  },
 });

@@ -1,4 +1,6 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
+import { useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
 
 import { styles } from "./styles";
 import { GoBackButton, Icon, MenuList, View } from "../../components";
@@ -8,6 +10,21 @@ export const RestaurantScreen = ({ route }) => {
   const {
     params: { restaurant },
   } = route;
+
+  const [cart, setCart] = useState({
+    deliveryPrice: restaurant.deliveryPrice,
+    minOrder: restaurant.minOrder,
+    items: [],
+  });
+
+  const addToCart = (dish) => {
+    setCart((prevState) => ({
+      ...prevState,
+      items: [...(prevState.items || []), dish],
+    }));
+  };
+
+  console.log("cart", cart);
 
   return (
     <View isSafe style={styles.container}>
@@ -42,8 +59,24 @@ export const RestaurantScreen = ({ route }) => {
       <Text style={styles.menu}>Menu</Text>
 
       <View style={styles.menuSection}>
-        <MenuList data={restaurant.menu} />
+        <MenuList data={restaurant.menu} onAddtoCart={addToCart} />
       </View>
+
+      {cart.items.length ? (
+        <View style={styles.cartBanner}>
+          <Icon
+            name="cart"
+            size={32}
+            color={Colors.white}
+            style={styles.cartIcon}
+          />
+          <View style={styles.cartBadge}>
+            <Text style={styles.cartBadgeText}>{cart.items.length}</Text>
+          </View>
+          <Text style={styles.cartBannerText}>Go to cart</Text>
+          <Text style={styles.orderPrice}>(24.99 zł)</Text>
+        </View>
+      ) : null}
     </View>
   );
 };
