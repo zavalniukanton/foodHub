@@ -5,6 +5,7 @@ import { Colors } from "../../theme/colors";
 import { Icon } from "../Icon";
 import { View } from "../View";
 import { Button } from "../Button";
+import { CartList } from "../CartList";
 
 export const CartModal = ({ open, onClose, order }) => {
   return (
@@ -17,6 +18,8 @@ export const CartModal = ({ open, onClose, order }) => {
 
           <Text style={styles.cartTitle}>Cart</Text>
         </View>
+
+        <CartList data={order.items} />
       </View>
     </Modal>
   );

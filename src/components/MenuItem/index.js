@@ -68,6 +68,7 @@ export const MenuItem = ({ item, onAddtoCart }) => {
 
   const onPayButtonPress = useCallback(() => {
     onAddtoCart({
+      id: item.id,
       name: item.name,
       ...foodState,
       totalPrice: totalPriceForItem,
