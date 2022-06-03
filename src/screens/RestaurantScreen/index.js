@@ -1,9 +1,15 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { doc, setDoc } from "firebase/firestore";
 
 import { styles } from "./styles";
-import { GoBackButton, Icon, MenuList, View } from "../../components";
+import {
+  CartModal,
+  GoBackButton,
+  Icon,
+  MenuList,
+  View,
+} from "../../components";
 import { Colors } from "../../theme/colors";
 
 export const RestaurantScreen = ({ route }) => {
@@ -11,6 +17,7 @@ export const RestaurantScreen = ({ route }) => {
     params: { restaurant },
   } = route;
 
+  const [cartModalVisible, setCartModalVisible] = useState(false);
   const [cart, setCart] = useState({
     deliveryPrice: restaurant.deliveryPrice,
     minOrder: restaurant.minOrder,
@@ -24,7 +31,9 @@ export const RestaurantScreen = ({ route }) => {
     }));
   };
 
-  console.log("cart", cart);
+  const toggleCartVisibility = useCallback(() => {
+    setCartModalVisible((prevState) => !prevState);
+  }, []);
 
   return (
     <View isSafe style={styles.container}>
@@ -63,7 +72,7 @@ export const RestaurantScreen = ({ route }) => {
       </View>
 
       {cart.items.length ? (
-        <View style={styles.cartBanner}>
+        <Pressable style={styles.cartBanner} onPress={toggleCartVisibility}>
           <Icon
             name="cart"
             size={32}
@@ -74,9 +83,19 @@ export const RestaurantScreen = ({ route }) => {
             <Text style={styles.cartBadgeText}>{cart.items.length}</Text>
           </View>
           <Text style={styles.cartBannerText}>Go to cart</Text>
-          <Text style={styles.orderPrice}>(24.99 zł)</Text>
-        </View>
+          <Text style={styles.orderPrice}>(50.99 zł)</Text>
+        </Pressable>
       ) : null}
+
+      <CartModal
+        open={cartModalVisible}
+        onClose={toggleCartVisibility}
+        order={cart}
+      />
     </View>
   );
 };
+
+// TODO: fix order price inside cart banner
+// TODO: fix addToCart function
+// TODO: firestore or context ???
