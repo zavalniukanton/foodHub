@@ -53,7 +53,11 @@ export const MenuItem = ({ item }) => {
     setFoodState((prevState) => ({ ...prevState, amount: newAmount }));
   };
 
-  const totalPrice = useMemo(
+  const onPayButtonPress = () => {
+    toggleOnCardPress();
+  };
+
+  const totalPriceForItem = useMemo(
     () =>
       (
         foodState.amount *
@@ -123,8 +127,9 @@ export const MenuItem = ({ item }) => {
 
           <View style={styles.actionContainer}>
             <AmountSelect amount={foodState.amount} onChange={changeAmount} />
-            <Button style={styles.payButton}>
-              <Text style={styles.payButtonText}>{totalPrice} zł</Text>
+            <Button style={styles.payButton} onPress={onPayButtonPress}>
+              <Icon name="cart" size={18} color={Colors.white} />
+              <Text style={styles.payButtonText}>{totalPriceForItem} zł</Text>
             </Button>
           </View>
         </View>

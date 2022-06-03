@@ -132,12 +132,14 @@ export const styles = StyleSheet.create({
   payButton: {
     height: 30,
     paddingHorizontal: 10,
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 4,
     backgroundColor: Colors.blue,
   },
   payButtonText: {
+    marginLeft: 10,
     color: Colors.white,
   },
 });
