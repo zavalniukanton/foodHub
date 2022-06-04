@@ -13,3 +13,4 @@ export * from "./AmountSelect";
 export * from "./CartModal";
 export * from "./CartList";
 export * from "./CartItem";
+export * from "./DrawerMenu";
