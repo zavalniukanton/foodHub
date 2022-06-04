@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 25,
-    alignItems: "center",
     paddingHorizontal: 22,
   },
   modalHeader: {
@@ -37,6 +36,17 @@ export const styles = StyleSheet.create({
   cartTitle: {
     fontWeight: "700",
     fontSize: 26,
+    color: Colors.black,
+  },
+  priceContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  priceText: {
+    fontWeight: "400",
+    fontSize: 14,
     color: Colors.black,
   },
 });
