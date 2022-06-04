@@ -9,7 +9,9 @@ import {
   Button,
   FoodCategoriesList,
   RestaurantsList,
+  Icon,
 } from "../../components";
+import { Colors } from "../../theme/colors";
 
 export const HomeScreen = () => {
   const [activeTab, setActiveTab] = useState("delivery");
@@ -93,19 +95,23 @@ export const HomeScreen = () => {
 
   return (
     <View isSafe style={styles.container}>
+      <View style={styles.pageHeader}>
+        <Icon name="menu" color={Colors.white} size={24} />
+      </View>
+
       <View style={styles.tabsContainer}>
         <Button
           style={styles.tab(activeTab === "delivery")}
           onPress={handleDeliveryTabClick}
         >
-          <Text style={styles.tabName}>Delivery</Text>
+          <Text style={styles.tabName(activeTab === "delivery")}>Delivery</Text>
         </Button>
 
         <Button
           style={styles.tab(activeTab === "pickup")}
           onPress={handlePickupTabClick}
         >
-          <Text style={styles.tabName}>Pick up</Text>
+          <Text style={styles.tabName(activeTab === "pickup")}>Pick up</Text>
         </Button>
       </View>
 

@@ -4,6 +4,7 @@ export const Colors = {
   black: "#222222",
   white: "#ffffff",
   white_20: "rgba(255, 255, 255, 0.2)",
+  white_smoke: "##f5f5f5",
   gray: "#6e6869",
   border: "#bebebe",
   red: "#fc5c65",

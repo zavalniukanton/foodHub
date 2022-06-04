@@ -10,19 +10,17 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 100,
     backgroundColor:
-      selectedCategory === itemName
-        ? Colors.orange
-        : itemName === "Show more"
-        ? Colors.blue
-        : "transparent",
+      selectedCategory === itemName ? Colors.orange : "transparent",
     opacity: 1,
   }),
   buttonText: (selectedCategory, itemName) => ({
     fontWeight: "500",
     fontSize: 14,
     color:
-      selectedCategory === itemName || itemName === "Show more"
+      selectedCategory === itemName
         ? Colors.white
+        : itemName === "Show more"
+        ? Colors.orange
         : Colors.black,
   }),
 });
