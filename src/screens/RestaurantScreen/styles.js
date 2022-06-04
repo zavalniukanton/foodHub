@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   titleSection: {
-    marginTop: 80,
+    marginTop: 60,
     marginBottom: 10,
     paddingHorizontal: 22,
     flexDirection: "row",
@@ -80,9 +80,6 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 20,
     backgroundColor: Colors.mistyrose,
-  },
-  menuSection: {
-    paddingHorizontal: 22,
   },
   cartBanner: {
     position: "absolute",

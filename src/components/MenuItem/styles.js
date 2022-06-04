@@ -4,6 +4,8 @@ import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
+    marginBottom: 20,
+    marginHorizontal: 22,
     borderWidth: 1,
     borderColor: Colors.border,
     borderRadius: 10,

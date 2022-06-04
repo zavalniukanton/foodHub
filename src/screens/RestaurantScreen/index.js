@@ -67,9 +67,7 @@ export const RestaurantScreen = ({ route }) => {
 
       <Text style={styles.menu}>Menu</Text>
 
-      <View style={styles.menuSection}>
-        <MenuList data={restaurant.menu} onAddtoCart={addToCart} />
-      </View>
+      <MenuList data={restaurant.menu} onAddtoCart={addToCart} />
 
       {cart.items.length ? (
         <Pressable style={styles.cartBanner} onPress={toggleCartVisibility}>
