@@ -1,5 +1,5 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { doc, setDoc } from "firebase/firestore";
 
 import { styles } from "./styles";
@@ -34,6 +34,18 @@ export const RestaurantScreen = ({ route }) => {
   const toggleCartVisibility = useCallback(() => {
     setCartModalVisible((prevState) => !prevState);
   }, []);
+
+  const totalPriceOnCartBanner = useMemo(() => {
+    if (cart.items.length) {
+      return (
+        restaurant.deliveryPrice +
+        cart.items.reduce(
+          (total, item) => (total += Number(item.totalPrice)),
+          0
+        )
+      ).toFixed(2);
+    }
+  }, [cart.items.length]);
 
   return (
     <View isSafe style={styles.container}>
@@ -81,7 +93,7 @@ export const RestaurantScreen = ({ route }) => {
             <Text style={styles.cartBadgeText}>{cart.items.length}</Text>
           </View>
           <Text style={styles.cartBannerText}>Go to cart</Text>
-          <Text style={styles.orderPrice}>(50.99 zł)</Text>
+          <Text style={styles.orderPrice}>({totalPriceOnCartBanner} zł)</Text>
         </Pressable>
       ) : null}
 
