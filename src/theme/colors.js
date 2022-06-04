@@ -10,5 +10,6 @@ export const Colors = {
   red: "#fc5c65",
   green: "#004040",
   mistyrose: "#ffe4e1",
+  warning: "#fae7b5",
   bg_gradient: ["rgba(73, 77, 99, 0)", "#191b2f"],
 };

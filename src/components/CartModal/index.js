@@ -14,7 +14,7 @@ export const CartModal = ({ open, onClose, order }) => {
       order.items
         .reduce((total, item) => (total += Number(item.totalPrice)), 0)
         .toFixed(2),
-    []
+    [order.items]
   );
 
   const totalPrice = useMemo(
@@ -22,8 +22,20 @@ export const CartModal = ({ open, onClose, order }) => {
     [subtotalPrice]
   );
 
+  const isEnoughForDelivering = Number(subtotalPrice) >= order.minOrder;
+
+  const remainingPrice = useMemo(
+    () => (order.minOrder - Number(subtotalPrice)).toFixed(2),
+    [subtotalPrice]
+  );
+
   return (
-    <Modal animationType="slide" visible={open} onRequestClose={onClose}>
+    <Modal
+      animationType="slide"
+      visible={open}
+      onRequestClose={onClose}
+      statusBarTranslucent
+    >
       <View style={styles.container}>
         <View style={styles.modalHeader}>
           <Button style={styles.closeButton} onPress={onClose}>
@@ -51,6 +63,24 @@ export const CartModal = ({ open, onClose, order }) => {
             {totalPrice} zł
           </Text>
         </View>
+
+        {!isEnoughForDelivering ? (
+          <View style={styles.alert}>
+            <View style={styles.alertTop}>
+              <Text style={{ ...styles.alertTet, flexShrink: 1 }}>
+                Remaining amount to reach minimum order value
+              </Text>
+              <Text style={{ ...styles.alertTet, marginLeft: 6 }}>
+                {remainingPrice} zł
+              </Text>
+            </View>
+
+            <Text style={styles.alertTet}>
+              Unfortunately, you can not order yet. Delivery starting from a
+              minimum order value {order.minOrder} zł (excl. delivery cost)
+            </Text>
+          </View>
+        ) : null}
       </View>
     </Modal>
   );
