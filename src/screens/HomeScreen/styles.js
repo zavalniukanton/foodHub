@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: 45,
     marginBottom: 14,
-    backgroundColor: Colors.white_smoke,
+    backgroundColor: Colors.white,
   },
   tab: (activeTab) => ({
     flex: 1,
