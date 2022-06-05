@@ -68,4 +68,19 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.black,
   },
+  actionButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    marginTop: "auto",
+    marginHorizontal: -12,
+    borderTopWidth: 1,
+    borderColor: Colors.border,
+    backgroundColor: Colors.white,
+  },
+  actionButtonText: {
+    fontWeight: "500",
+    fontSize: 16,
+    color: Colors.blue,
+  },
 });

@@ -1,5 +1,5 @@
 import { Text, Modal } from "react-native";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 
 import { styles } from "./styles";
 import { Colors } from "../../theme/colors";
@@ -18,7 +18,7 @@ export const CartModal = ({ open, onClose, order }) => {
   );
 
   const totalPrice = useMemo(
-    () => Number(subtotalPrice) + order.deliveryPrice,
+    () => (Number(subtotalPrice) + order.deliveryPrice).toFixed(2),
     [subtotalPrice]
   );
 
@@ -28,6 +28,10 @@ export const CartModal = ({ open, onClose, order }) => {
     () => (order.minOrder - Number(subtotalPrice)).toFixed(2),
     [subtotalPrice]
   );
+
+  const handleAddMoreButtonClick = useCallback(() => {
+    onClose();
+  }, []);
 
   return (
     <Modal
@@ -81,6 +85,19 @@ export const CartModal = ({ open, onClose, order }) => {
             </Text>
           </View>
         ) : null}
+
+        {!isEnoughForDelivering ? (
+          <Button
+            style={styles.actionButton}
+            onPress={handleAddMoreButtonClick}
+          >
+            <Text style={styles.actionButtonText}>Add more items</Text>
+          </Button>
+        ) : (
+          <Button style={styles.actionButton}>
+            <Text style={styles.actionButtonText}>Checkout</Text>
+          </Button>
+        )}
       </View>
     </Modal>
   );
