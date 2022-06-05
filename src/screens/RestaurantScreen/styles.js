@@ -82,10 +82,6 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.mistyrose,
   },
   cartBanner: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
     height: 60,
     flexDirection: "row",
     alignItems: "center",
