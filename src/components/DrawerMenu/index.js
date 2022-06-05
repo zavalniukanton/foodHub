@@ -5,9 +5,13 @@ import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { View } from "../View";
 import { Colors } from "../../theme/colors";
+import { navigation } from "../../navigation/navigationRef";
 
 export const DrawerMenu = () => {
-  const handleOrdersClick = () => {};
+  const handleOrdersClick = () => {
+    navigation.navigate("Orders");
+  };
+
   const handleChartClick = () => {};
 
   return (

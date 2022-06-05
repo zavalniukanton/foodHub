@@ -30,8 +30,8 @@ export const HomeScreen = () => {
   );
 
   useEffect(() => {
-    const foodategoriesRef = collection(db, "foodCategories");
-    const q = query(foodategoriesRef, orderBy("id"));
+    const foodCategoriesRef = collection(db, "foodCategories");
+    const q = query(foodCategoriesRef, orderBy("id"));
 
     onSnapshot(q, (querySnapshot) => {
       setFoodCategories(querySnapshot.docs.map((doc) => doc.data()));

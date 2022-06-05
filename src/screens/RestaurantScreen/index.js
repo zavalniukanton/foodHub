@@ -106,6 +106,5 @@ export const RestaurantScreen = ({ route }) => {
   );
 };
 
-// TODO: fix order price inside cart banner
 // TODO: fix addToCart function
 // TODO: firestore or context ???
