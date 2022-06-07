@@ -8,8 +8,12 @@ import { View } from "../View";
 import { AmountSelect } from "../AmountSelect";
 import { Button } from "../Button";
 
-export const MenuItem = ({ item, onAddtoCart }) => {
-  const [isCardPresed, setIsCardPressed] = useState(false);
+export const MenuItem = ({
+  item,
+  onAddtoCart,
+  toggleOnCardPress,
+  isCardPresed,
+}) => {
   const [foodState, setFoodState] = useState({
     amount: 1,
     selectedOptions: [],
@@ -28,8 +32,8 @@ export const MenuItem = ({ item, onAddtoCart }) => {
     [foodState.amount, foodState.selectedOptions]
   );
 
-  const toggleOnCardPress = () => {
-    setIsCardPressed((prevState) => !prevState);
+  const handleCardPress = () => {
+    toggleOnCardPress(item.id, true);
   };
 
   const isOptionSelected = (optionId) => {
@@ -73,17 +77,21 @@ export const MenuItem = ({ item, onAddtoCart }) => {
       ...foodState,
       totalPrice: totalPriceForItem,
     });
-    toggleOnCardPress();
+    handleCardPress();
   }, [foodState]);
 
   return (
     <View style={styles.card}>
-      <Pressable style={styles.pressablePart} onPress={toggleOnCardPress}>
+      <Pressable style={styles.pressablePart} onPress={handleCardPress}>
         <Text style={styles.foodName}>{item.name}</Text>
 
-        <Pressable style={styles.addButton} onPress={toggleOnCardPress}>
+        <Pressable style={styles.addButton} onPress={handleCardPress}>
           <Icon
-            name={isCardPresed ? "close" : "plus"}
+            name={
+              isCardPresed.cardId === item.id && isCardPresed.expanded === true
+                ? "close"
+                : "plus"
+            }
             size={24}
             color={Colors.blue}
           />
@@ -109,7 +117,7 @@ export const MenuItem = ({ item, onAddtoCart }) => {
         </View>
       </Pressable>
 
-      {isCardPresed && (
+      {isCardPresed.cardId === item.id && isCardPresed.expanded === true ? (
         <View style={styles.optionsContainer}>
           <Text style={styles.optionsTitle}>Options</Text>
 
@@ -139,7 +147,7 @@ export const MenuItem = ({ item, onAddtoCart }) => {
             </Button>
           </View>
         </View>
-      )}
+      ) : null}
     </View>
   );
 };

@@ -18,11 +18,25 @@ export const RestaurantScreen = ({ route }) => {
   } = route;
 
   const [cartModalVisible, setCartModalVisible] = useState(false);
+  const [isCardPresed, setIsCardPressed] = useState({
+    cardId: null,
+    expanded: false,
+  });
   const [cart, setCart] = useState({
     deliveryPrice: restaurant.deliveryPrice,
     minOrder: restaurant.minOrder,
     items: [],
   });
+
+  const toggleOnCardPress = (cardId, isPressed) => {
+    setIsCardPressed((prevState) => ({
+      cardId,
+      expanded:
+        cardId === prevState.cardId && prevState.expanded === true
+          ? false
+          : isPressed,
+    }));
+  };
 
   const addToCart = (dish) => {
     setCart((prevState) => ({
@@ -49,37 +63,47 @@ export const RestaurantScreen = ({ route }) => {
 
   return (
     <View isSafe style={styles.container}>
-      <ImageBackground style={styles.header} source={{ uri: restaurant.image }}>
-        <GoBackButton style={{ left: 20, top: 20 }} />
-        <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={{ uri: restaurant.logo }} />
-        </View>
-      </ImageBackground>
-
-      <View style={styles.titleSection}>
-        <Text style={styles.restaurantName}>{restaurant.name}</Text>
-        <Pressable style={styles.actionButton("info")}>
-          <Icon name="information-variant" size={24} color={Colors.blue} />
-        </Pressable>
-        <Pressable style={styles.actionButton("heart")}>
-          <Icon name="cards-heart-outline" size={24} color={Colors.blue} />
-        </Pressable>
-      </View>
-
-      <View style={styles.ratingSection}>
-        <Icon
-          name="star"
-          color={Colors.orange}
-          size={20}
-          style={{ marginRight: 4 }}
-        />
-        <Text style={styles.rating}>{restaurant.rating}</Text>
-        <Text style={styles.review}>{restaurant.review} reviews</Text>
-      </View>
+      {!isCardPresed.expanded === true ? (
+        <>
+          <ImageBackground
+            style={styles.header}
+            source={{ uri: restaurant.image }}
+          >
+            <GoBackButton style={{ left: 20, top: 20 }} />
+            <View style={styles.logoContainer}>
+              <Image style={styles.logo} source={{ uri: restaurant.logo }} />
+            </View>
+          </ImageBackground>
+          <View style={styles.titleSection}>
+            <Text style={styles.restaurantName}>{restaurant.name}</Text>
+            <Pressable style={styles.actionButton("info")}>
+              <Icon name="information-variant" size={24} color={Colors.blue} />
+            </Pressable>
+            <Pressable style={styles.actionButton("heart")}>
+              <Icon name="cards-heart-outline" size={24} color={Colors.blue} />
+            </Pressable>
+          </View>
+          <View style={styles.ratingSection}>
+            <Icon
+              name="star"
+              color={Colors.orange}
+              size={20}
+              style={{ marginRight: 4 }}
+            />
+            <Text style={styles.rating}>{restaurant.rating}</Text>
+            <Text style={styles.review}>{restaurant.review} reviews</Text>
+          </View>
+        </>
+      ) : null}
 
       <Text style={styles.menu}>Menu</Text>
 
-      <MenuList data={restaurant.menu} onAddtoCart={addToCart} />
+      <MenuList
+        data={restaurant.menu}
+        onAddtoCart={addToCart}
+        toggleOnCardPress={toggleOnCardPress}
+        isCardPresed={isCardPresed}
+      />
 
       {cart.items.length ? (
         <Pressable style={styles.cartBanner} onPress={toggleCartVisibility}>
