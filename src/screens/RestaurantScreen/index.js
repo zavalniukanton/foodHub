@@ -2,21 +2,15 @@ import { Text, ImageBackground, Image, Pressable } from "react-native";
 import { useState, useCallback, useMemo } from "react";
 
 import { styles } from "./styles";
-import {
-  CartModal,
-  GoBackButton,
-  Icon,
-  MenuList,
-  View,
-} from "../../components";
+import { GoBackButton, Icon, MenuList, View } from "../../components";
 import { Colors } from "../../theme/colors";
+import { navigation } from "../../navigation/navigationRef";
 
 export const RestaurantScreen = ({ route }) => {
   const {
     params: { restaurant },
   } = route;
 
-  const [cartModalVisible, setCartModalVisible] = useState(false);
   const [isCardPresed, setIsCardPressed] = useState({
     cardId: null,
     expanded: false,
@@ -37,16 +31,16 @@ export const RestaurantScreen = ({ route }) => {
     }));
   };
 
+  const handleCartBannerPress = useCallback(() => {
+    navigation.navigate("Cart", { order: cartLocal });
+  }, [cartLocal]);
+
   const addToCart = (dish) => {
     setCartLocal((prevState) => ({
       ...prevState,
       items: [...(prevState.items || []), dish],
     }));
   };
-
-  const toggleCartVisibility = useCallback(() => {
-    setCartModalVisible((prevState) => !prevState);
-  }, []);
 
   const totalPriceOnCartBanner = useMemo(() => {
     if (cartLocal.items.length) {
@@ -105,7 +99,7 @@ export const RestaurantScreen = ({ route }) => {
       />
 
       {cartLocal.items.length ? (
-        <Pressable style={styles.cartBanner} onPress={toggleCartVisibility}>
+        <Pressable style={styles.cartBanner} onPress={handleCartBannerPress}>
           <Icon
             name="cart"
             size={32}
@@ -119,12 +113,6 @@ export const RestaurantScreen = ({ route }) => {
           <Text style={styles.orderPrice}>({totalPriceOnCartBanner} zł)</Text>
         </Pressable>
       ) : null}
-
-      <CartModal
-        open={cartModalVisible}
-        onClose={toggleCartVisibility}
-        order={cartLocal}
-      />
     </View>
   );
 };

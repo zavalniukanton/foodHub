@@ -3,16 +3,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { config } from "./config";
 import { HomeScreen } from "../screens/HomeScreen";
 import { RestaurantScreen } from "../screens/RestaurantScreen";
-import { OrdersScreen } from "../screens/OrdersScreen";
+import { CartScreen } from "../screens/CartScreen";
 
 const Stack = createStackNavigator();
 
 export const MainStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Home" screenOptions={config}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Restaurant" component={RestaurantScreen} />
-      <Stack.Screen name="Orders" component={OrdersScreen} />
+    <Stack.Navigator>
+      <Stack.Group screenOptions={config}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Restaurant" component={RestaurantScreen} />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ ...config, presentation: "modal" }}>
+        <Stack.Screen name="Cart" component={CartScreen} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };
