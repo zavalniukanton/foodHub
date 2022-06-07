@@ -19,6 +19,7 @@ const screen = Dimensions.get("screen");
 
 export const HomeScreen = () => {
   const drawer = useRef(null);
+
   const [activeTab, setActiveTab] = useState("delivery");
   const [foodCategories, setFoodCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");

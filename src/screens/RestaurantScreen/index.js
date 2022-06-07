@@ -1,6 +1,5 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
 import { useState, useCallback, useMemo } from "react";
-import { doc, setDoc } from "firebase/firestore";
 
 import { styles } from "./styles";
 import {
@@ -22,7 +21,7 @@ export const RestaurantScreen = ({ route }) => {
     cardId: null,
     expanded: false,
   });
-  const [cart, setCart] = useState({
+  const [cartLocal, setCartLocal] = useState({
     deliveryPrice: restaurant.deliveryPrice,
     minOrder: restaurant.minOrder,
     items: [],
@@ -39,7 +38,7 @@ export const RestaurantScreen = ({ route }) => {
   };
 
   const addToCart = (dish) => {
-    setCart((prevState) => ({
+    setCartLocal((prevState) => ({
       ...prevState,
       items: [...(prevState.items || []), dish],
     }));
@@ -50,16 +49,16 @@ export const RestaurantScreen = ({ route }) => {
   }, []);
 
   const totalPriceOnCartBanner = useMemo(() => {
-    if (cart.items.length) {
+    if (cartLocal.items.length) {
       return (
         restaurant.deliveryPrice +
-        cart.items.reduce(
+        cartLocal.items.reduce(
           (total, item) => (total += Number(item.totalPrice)),
           0
         )
       ).toFixed(2);
     }
-  }, [cart.items.length]);
+  }, [cartLocal.items.length]);
 
   return (
     <View isSafe style={styles.container}>
@@ -105,7 +104,7 @@ export const RestaurantScreen = ({ route }) => {
         isCardPresed={isCardPresed}
       />
 
-      {cart.items.length ? (
+      {cartLocal.items.length ? (
         <Pressable style={styles.cartBanner} onPress={toggleCartVisibility}>
           <Icon
             name="cart"
@@ -114,7 +113,7 @@ export const RestaurantScreen = ({ route }) => {
             style={styles.cartIcon}
           />
           <View style={styles.cartBadge}>
-            <Text style={styles.cartBadgeText}>{cart.items.length}</Text>
+            <Text style={styles.cartBadgeText}>{cartLocal.items.length}</Text>
           </View>
           <Text style={styles.cartBannerText}>Go to cart</Text>
           <Text style={styles.orderPrice}>({totalPriceOnCartBanner} zł)</Text>
@@ -124,11 +123,8 @@ export const RestaurantScreen = ({ route }) => {
       <CartModal
         open={cartModalVisible}
         onClose={toggleCartVisibility}
-        order={cart}
+        order={cartLocal}
       />
     </View>
   );
 };
-
-// TODO: fix addToCart function
-// TODO: firestore or context ???
