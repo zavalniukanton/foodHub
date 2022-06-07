@@ -1,5 +1,5 @@
-import { Text, DrawerLayoutAndroid, Dimensions } from "react-native";
-import { useState, useEffect, useRef } from "react";
+import { Text } from "react-native";
+import { useState, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
 import { styles } from "./styles";
@@ -10,16 +10,10 @@ import {
   FoodCategoriesList,
   RestaurantsList,
   Icon,
-  DrawerMenu,
 } from "../../components";
 import { Colors } from "../../theme/colors";
-import { getDrawerMenuWidth } from "../../utils/getDrawerMenuWidth";
 
-const screen = Dimensions.get("screen");
-
-export const HomeScreen = () => {
-  const drawer = useRef(null);
-
+export const HomeScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("delivery");
   const [foodCategories, setFoodCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -58,7 +52,7 @@ export const HomeScreen = () => {
   }, []);
 
   const handleMenuOpen = () => {
-    drawer.current.openDrawer();
+    navigation.openDrawer();
   };
 
   const handleDeliveryTabClick = () => {
@@ -104,46 +98,38 @@ export const HomeScreen = () => {
   };
 
   return (
-    <DrawerLayoutAndroid
-      ref={drawer}
-      drawerWidth={getDrawerMenuWidth(screen)}
-      renderNavigationView={DrawerMenu}
-    >
-      <View isSafe style={styles.container}>
-        <View style={styles.pageHeader}>
-          <Button onPress={handleMenuOpen}>
-            <Icon name="menu" color={Colors.white} size={24} />
-          </Button>
-        </View>
-
-        <View style={styles.tabsContainer}>
-          <Button
-            style={styles.tab(activeTab === "delivery")}
-            onPress={handleDeliveryTabClick}
-          >
-            <Text style={styles.tabName(activeTab === "delivery")}>
-              Delivery
-            </Text>
-          </Button>
-
-          <Button
-            style={styles.tab(activeTab === "pickup")}
-            onPress={handlePickupTabClick}
-          >
-            <Text style={styles.tabName(activeTab === "pickup")}>Pick up</Text>
-          </Button>
-        </View>
-
-        <View style={styles.categoriesContainer}>
-          <FoodCategoriesList
-            data={categoriesToDisplay}
-            selectedCategory={selectedCategory}
-            onSelectCategory={handleFoodCategoryClick}
-          />
-        </View>
-
-        {showRestaurantsList(selectedCategory)}
+    <View isSafe style={styles.container}>
+      <View style={styles.pageHeader}>
+        <Button onPress={handleMenuOpen}>
+          <Icon name="menu" color={Colors.white} size={24} />
+        </Button>
       </View>
-    </DrawerLayoutAndroid>
+
+      <View style={styles.tabsContainer}>
+        <Button
+          style={styles.tab(activeTab === "delivery")}
+          onPress={handleDeliveryTabClick}
+        >
+          <Text style={styles.tabName(activeTab === "delivery")}>Delivery</Text>
+        </Button>
+
+        <Button
+          style={styles.tab(activeTab === "pickup")}
+          onPress={handlePickupTabClick}
+        >
+          <Text style={styles.tabName(activeTab === "pickup")}>Pick up</Text>
+        </Button>
+      </View>
+
+      <View style={styles.categoriesContainer}>
+        <FoodCategoriesList
+          data={categoriesToDisplay}
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleFoodCategoryClick}
+        />
+      </View>
+
+      {showRestaurantsList(selectedCategory)}
+    </View>
   );
 };

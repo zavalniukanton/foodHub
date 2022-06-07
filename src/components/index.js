@@ -10,7 +10,6 @@ export * from "./RestaurantsList";
 export * from "./MenuList";
 export * from "./MenuItem";
 export * from "./AmountSelect";
-export * from "./CartModal";
 export * from "./CartList";
 export * from "./CartItem";
 export * from "./DrawerMenu";
