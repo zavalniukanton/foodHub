@@ -5,20 +5,18 @@ import { styles } from "./styles";
 import { GoBackButton, Icon, MenuList, View } from "../../components";
 import { Colors } from "../../theme/colors";
 import { navigation } from "../../navigation/navigationRef";
+import { useCartContext } from "../../context/cartContext";
 
 export const RestaurantScreen = ({ route }) => {
   const {
     params: { restaurant },
   } = route;
 
+  const { cart, onAddToCartContext } = useCartContext();
+
   const [isCardPresed, setIsCardPressed] = useState({
     cardId: null,
     expanded: false,
-  });
-  const [cartLocal, setCartLocal] = useState({
-    deliveryPrice: restaurant.deliveryPrice,
-    minOrder: restaurant.minOrder,
-    items: [],
   });
 
   const toggleOnCardPress = (cardId, isPressed) => {
@@ -32,27 +30,31 @@ export const RestaurantScreen = ({ route }) => {
   };
 
   const handleCartBannerPress = useCallback(() => {
-    navigation.navigate("Cart", { order: cartLocal });
-  }, [cartLocal]);
+    navigation.navigate("Cart", { order: cart?.[restaurant.id] });
+  }, [cart?.[restaurant.id]]);
 
   const addToCart = (dish) => {
-    setCartLocal((prevState) => ({
-      ...prevState,
-      items: [...(prevState.items || []), dish],
-    }));
+    onAddToCartContext({
+      data: {
+        deliveryPrice: restaurant.deliveryPrice,
+        minOrder: restaurant.minOrder,
+        menuItem: dish,
+      },
+      restaurantId: restaurant.id,
+    });
   };
 
   const totalPriceOnCartBanner = useMemo(() => {
-    if (cartLocal.items.length) {
+    if (cart?.[restaurant.id]?.items?.length) {
       return (
         restaurant.deliveryPrice +
-        cartLocal.items.reduce(
+        cart?.[restaurant.id]?.items?.reduce(
           (total, item) => (total += Number(item.totalPrice)),
           0
         )
       ).toFixed(2);
     }
-  }, [cartLocal.items.length]);
+  }, [cart?.[restaurant.id]?.items?.length]);
 
   return (
     <View isSafe style={styles.container}>
@@ -98,7 +100,7 @@ export const RestaurantScreen = ({ route }) => {
         isCardPresed={isCardPresed}
       />
 
-      {cartLocal.items.length ? (
+      {cart?.[restaurant.id]?.items?.length ? (
         <Pressable style={styles.cartBanner} onPress={handleCartBannerPress}>
           <Icon
             name="cart"
@@ -107,7 +109,9 @@ export const RestaurantScreen = ({ route }) => {
             style={styles.cartIcon}
           />
           <View style={styles.cartBadge}>
-            <Text style={styles.cartBadgeText}>{cartLocal.items.length}</Text>
+            <Text style={styles.cartBadgeText}>
+              {cart?.[restaurant.id]?.items?.length}
+            </Text>
           </View>
           <Text style={styles.cartBannerText}>Go to cart</Text>
           <Text style={styles.orderPrice}>({totalPriceOnCartBanner} zł)</Text>

@@ -14,14 +14,14 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
 
   const addToCart = ({ data, restaurantId }) => {
-    setCart({
+    setCart((prevState) => ({
       ...prevState,
       [restaurantId]: {
         deliveryPrice: data.deliveryPrice,
         minOrder: data.minOrder,
         items: [...(prevState[restaurantId]?.items || []), data.menuItem],
       },
-    });
+    }));
   };
 
   return (
