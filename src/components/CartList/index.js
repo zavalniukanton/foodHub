@@ -5,11 +5,11 @@ import { CartItem } from "../CartItem";
 export const CartList = ({ data }) => {
   return (
     <FlatList
-      data={data}
+      data={data.items}
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
       renderItem={({ item }) => {
-        return <CartItem item={item} />;
+        return <CartItem item={item} restaurantId={data.restaurantId} />;
       }}
     />
   );

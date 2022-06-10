@@ -40,4 +40,10 @@ export const styles = StyleSheet.create({
   noOptions: {
     color: Colors.border,
   },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
+  },
 });

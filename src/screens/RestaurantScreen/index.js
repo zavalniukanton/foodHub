@@ -1,5 +1,5 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
-import { useState, useCallback, useMemo } from "react";
+import { useState } from "react";
 
 import { styles } from "./styles";
 import { GoBackButton, Icon, MenuList, View } from "../../components";
@@ -12,7 +12,7 @@ export const RestaurantScreen = ({ route }) => {
     params: { restaurant },
   } = route;
 
-  const { cart, onAddToCartContext } = useCartContext();
+  const { cart, onAddToCartContext, totalPrice } = useCartContext();
 
   const [isCardPresed, setIsCardPressed] = useState({
     cardId: null,
@@ -29,9 +29,9 @@ export const RestaurantScreen = ({ route }) => {
     }));
   };
 
-  const handleCartBannerPress = useCallback(() => {
-    navigation.navigate("Cart", { order: cart?.[restaurant.id] });
-  }, [cart?.[restaurant.id]]);
+  const handleCartBannerPress = () => {
+    navigation.navigate("Cart", { restaurantId: restaurant.id });
+  };
 
   const addToCart = (dish) => {
     onAddToCartContext({
@@ -43,18 +43,6 @@ export const RestaurantScreen = ({ route }) => {
       restaurantId: restaurant.id,
     });
   };
-
-  const totalPriceOnCartBanner = useMemo(() => {
-    if (cart?.[restaurant.id]?.items?.length) {
-      return (
-        restaurant.deliveryPrice +
-        cart?.[restaurant.id]?.items?.reduce(
-          (total, item) => (total += Number(item.totalPrice)),
-          0
-        )
-      ).toFixed(2);
-    }
-  }, [cart?.[restaurant.id]?.items?.length]);
 
   return (
     <View isSafe style={styles.container}>
@@ -114,7 +102,9 @@ export const RestaurantScreen = ({ route }) => {
             </Text>
           </View>
           <Text style={styles.cartBannerText}>Go to cart</Text>
-          <Text style={styles.orderPrice}>({totalPriceOnCartBanner} zł)</Text>
+          <Text style={styles.orderPrice}>
+            ({totalPrice(restaurant.id)} zł)
+          </Text>
         </Pressable>
       ) : null}
     </View>

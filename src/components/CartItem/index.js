@@ -3,8 +3,22 @@ import { Text } from "react-native";
 import { styles } from "./styles";
 import { View } from "../View";
 import { AmountSelect } from "../AmountSelect";
+import { Icon } from "../Icon";
+import { Colors } from "../../theme/colors";
+import { Button } from "../Button";
+import { useCartContext } from "../../context/cartContext";
 
-export const CartItem = ({ item }) => {
+export const CartItem = ({ item, restaurantId }) => {
+  const { onUpdateAmount, onRemoveFromCart } = useCartContext();
+
+  const changeAmount = (newAmount) => {
+    onUpdateAmount({ newAmount, restaurantId, itemId: item.id });
+  };
+
+  const deleteItemFromCart = () => {
+    onRemoveFromCart({ restaurantId, itemId: item.id });
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
@@ -22,8 +36,11 @@ export const CartItem = ({ item }) => {
         <Text style={styles.noOptions}>no selected options</Text>
       )}
 
-      <View style={{ marginLeft: "auto" }}>
-        <AmountSelect amount={item.amount} />
+      <View style={styles.actions}>
+        <AmountSelect amount={item.amount} onChange={changeAmount} />
+        <Button onPress={deleteItemFromCart}>
+          <Icon name="trash-can-outline" size={28} color={Colors.red} />
+        </Button>
       </View>
     </View>
   );
