@@ -6,6 +6,7 @@ import { Colors } from "../../theme/colors";
 import { CartList, Icon, View, Button } from "../../components";
 import { navigation } from "../../navigation/navigationRef";
 import { useCartContext } from "../../context/cartContext";
+import { useOrderContext } from "../../context/orderContext";
 
 export const CartScreen = ({ route }) => {
   const {
@@ -20,11 +21,21 @@ export const CartScreen = ({ route }) => {
     remainingPrice,
   } = useCartContext();
 
+  const { orders, onAddToOrders } = useOrderContext();
+
   const handleGoBack = useCallback(() => {
     navigation.goBack();
   }, []);
 
-  console.log("cart", cart);
+  const handleCheckout = () => {
+    onAddToOrders({
+      ...cart[restaurantId],
+      orderAt: new Date(),
+      orderStatus: "in progress",
+    });
+  };
+
+  console.log("orders", orders); // TODO: delete
 
   return (
     <View style={styles.container}>
@@ -81,7 +92,7 @@ export const CartScreen = ({ route }) => {
           <Text style={styles.actionButtonText}>Add more items</Text>
         </Button>
       ) : (
-        <Button style={styles.actionButton}>
+        <Button style={styles.actionButton} onPress={handleCheckout}>
           <Text style={styles.actionButtonText}>Checkout</Text>
         </Button>
       )}
