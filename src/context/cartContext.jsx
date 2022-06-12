@@ -43,6 +43,7 @@ export const CartProvider = ({ children }) => {
       ...prevState,
       [restaurantId]: {
         restaurantId,
+        restaurantName: data.restaurantName,
         deliveryPrice: data.deliveryPrice,
         minOrder: data.minOrder,
         items: [...(prevState[restaurantId]?.items || []), data.menuItem],

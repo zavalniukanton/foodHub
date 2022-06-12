@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   noOptions: {
+    marginBottom: 10,
     color: Colors.border,
   },
   actions: {

@@ -20,29 +20,11 @@ export const CartScreen = ({ route }) => {
     remainingPrice,
   } = useCartContext();
 
-  // const subtotalPrice = useMemo(
-  //   () =>
-  //     order.items
-  //       .reduce((total, item) => (total += Number(item.totalPrice)), 0)
-  //       .toFixed(2),
-  //   [order.items]
-  // );
-
-  // const totalPrice = useMemo(
-  //   () => (Number(subtotalPrice) + order.deliveryPrice).toFixed(2),
-  //   [subtotalPrice]
-  // );
-
-  // const isEnoughForDelivering = Number(subtotalPrice) >= order.minOrder;
-
-  // const remainingPrice = useMemo(
-  //   () => (order.minOrder - Number(subtotalPrice)).toFixed(2),
-  //   [subtotalPrice]
-  // );
-
   const handleGoBack = useCallback(() => {
     navigation.goBack();
   }, []);
+
+  console.log("cart", cart);
 
   return (
     <View style={styles.container}>
