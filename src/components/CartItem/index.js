@@ -19,11 +19,17 @@ export const CartItem = ({ item, restaurantId }) => {
     onRemoveFromCart({ restaurantId, itemId: item.id });
   };
 
+  const totalItemPrice = (
+    item.amount *
+    (item.price +
+      item.selectedOptions.reduce((total, option) => total + option.price, 0))
+  ).toFixed(2);
+
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemPrice}>{item.price * item.amount} zł</Text>
+        <Text style={styles.itemPrice}>{totalItemPrice} zł</Text>
       </View>
 
       {item.selectedOptions.length ? (
