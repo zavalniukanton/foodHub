@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 import { styles } from "./styles";
 import { Colors } from "../../theme/colors";
@@ -19,6 +19,7 @@ export const CartScreen = ({ route }) => {
     totalPrice,
     isEnoughForDelivering,
     remainingPrice,
+    onClearRestaurantCart,
   } = useCartContext();
 
   const { onAddToOrders } = useOrderContext();
@@ -29,19 +30,29 @@ export const CartScreen = ({ route }) => {
 
   const handleCheckout = () => {
     onAddToOrders({
-      ...cart[restaurantId],
+      ...cart?.[restaurantId],
       orderAt: new Date(),
       orderStatus: "in progress",
       orderPrice: totalPrice(restaurantId),
     });
+    onClearRestaurantCart(restaurantId);
     navigation.navigate("Orders");
   };
 
-  useEffect(() => {
-    if (!cart[restaurantId].items.length) {
-      navigation.goBack();
-    }
-  }, [cart[restaurantId].items.length]);
+  if (!cart?.[restaurantId]?.items?.length) {
+    return (
+      <View style={styles.emptyCartContainer}>
+        <Icon name="cart" size={44} color={Colors.blue} />
+        <Text style={styles.emptyCartTitle}>No selected meal</Text>
+        <Text style={styles.emptyCartDescription}>
+          You have not selected any meal yet
+        </Text>
+        <Button style={styles.selectMealButton} onPress={handleGoBack}>
+          <Text style={styles.selectMealButtonText}>Select meal</Text>
+        </Button>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -53,7 +64,7 @@ export const CartScreen = ({ route }) => {
         <Text style={styles.cartTitle}>Cart</Text>
       </View>
 
-      <CartList data={cart[restaurantId]} />
+      <CartList data={cart?.[restaurantId]} />
 
       <View style={styles.priceContainer}>
         <Text style={styles.priceText}>Subtotal</Text>
@@ -63,7 +74,7 @@ export const CartScreen = ({ route }) => {
       <View style={styles.priceContainer}>
         <Text style={styles.priceText}>Delivery cost</Text>
         <Text style={styles.priceText}>
-          {cart[restaurantId].deliveryPrice} zł
+          {cart?.[restaurantId]?.deliveryPrice} zł
         </Text>
       </View>
 
@@ -87,8 +98,8 @@ export const CartScreen = ({ route }) => {
 
           <Text style={styles.alertTet}>
             Unfortunately, you can not order yet. Delivery starting from a
-            minimum order value {cart[restaurantId].minOrder} zł (excl. delivery
-            cost)
+            minimum order value {cart?.[restaurantId]?.minOrder} zł (excl.
+            delivery cost)
           </Text>
         </View>
       ) : null}

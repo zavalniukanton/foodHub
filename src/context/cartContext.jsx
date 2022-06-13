@@ -14,7 +14,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
 
   const subtotalPrice = (restaurantId) => {
-    return cart[restaurantId].items
+    return cart?.[restaurantId]?.items
       .reduce(
         (total, item) =>
           (total +=
@@ -31,17 +31,19 @@ export const CartProvider = ({ children }) => {
 
   const totalPrice = (restaurantId) => {
     return (
-      Number(subtotalPrice(restaurantId)) + cart[restaurantId].deliveryPrice
+      Number(subtotalPrice(restaurantId)) + cart?.[restaurantId]?.deliveryPrice
     ).toFixed(2);
   };
 
   const isEnoughForDelivering = (restaurantId) => {
-    return Number(subtotalPrice(restaurantId)) >= cart[restaurantId].minOrder;
+    return (
+      Number(subtotalPrice(restaurantId)) >= cart?.[restaurantId]?.minOrder
+    );
   };
 
   const remainingPrice = (restaurantId) => {
     return (
-      cart[restaurantId].minOrder - Number(subtotalPrice(restaurantId))
+      cart?.[restaurantId]?.minOrder - Number(subtotalPrice(restaurantId))
     ).toFixed(2);
   };
 
@@ -89,6 +91,13 @@ export const CartProvider = ({ children }) => {
     }));
   };
 
+  const clearRestaurantCart = (restaurantId) => {
+    const fieldToRemove = String(restaurantId);
+    const { [fieldToRemove]: removedCartProperty, ...restCart } = cart;
+
+    setCart(restCart);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -96,6 +105,7 @@ export const CartProvider = ({ children }) => {
         onAddToCart: addToCart,
         onUpdateAmount: updateAmount,
         onRemoveFromCart: removeFromCart,
+        onClearRestaurantCart: clearRestaurantCart,
         subtotalPrice,
         totalPrice,
         isEnoughForDelivering,

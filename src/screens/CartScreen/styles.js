@@ -3,6 +3,40 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
+  emptyCartContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.white,
+  },
+  emptyCartTitle: {
+    marginTop: 10,
+    fontWeight: "600",
+    fontSize: 18,
+    color: Colors.black,
+  },
+  emptyCartDescription: {
+    marginTop: 10,
+    fontWeight: "400",
+    fontSize: 12,
+    color: Colors.black,
+  },
+  selectMealButton: {
+    alignSelf: "center",
+    width: "50%",
+    height: 40,
+    marginTop: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 4,
+  },
+  selectMealButtonText: {
+    fontWeight: "500",
+    fontSize: 14,
+    color: Colors.blue,
+  },
   container: {
     flex: 1,
     paddingTop: 50,
