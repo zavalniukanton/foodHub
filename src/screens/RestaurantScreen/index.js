@@ -48,8 +48,8 @@ export const RestaurantScreen = ({ route }) => {
     });
   };
 
-  const totalPriceForCartBanner = cart?.[restaurant.id]?.items
-    ?.reduce(
+  const totalPriceForCartBanner = (
+    cart?.[restaurant.id]?.items?.reduce(
       (total, item) =>
         (total +=
           item.amount *
@@ -59,8 +59,8 @@ export const RestaurantScreen = ({ route }) => {
               0
             ))),
       0
-    )
-    .toFixed(2);
+    ) + restaurant.deliveryPrice
+  ).toFixed(2);
 
   return (
     <View isSafe style={styles.container}>
