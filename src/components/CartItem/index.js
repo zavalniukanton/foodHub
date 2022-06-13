@@ -1,12 +1,12 @@
 import { Text } from "react-native";
 
 import { styles } from "./styles";
-import { View } from "../View";
-import { AmountSelect } from "../AmountSelect";
-import { Icon } from "../Icon";
 import { Colors } from "../../theme/colors";
-import { Button } from "../Button";
 import { useCartContext } from "../../context/cartContext";
+import { View } from "../View";
+import { Icon } from "../Icon";
+import { Button } from "../Button";
+import { AmountSelect } from "../AmountSelect";
 
 export const CartItem = ({ item, restaurantId }) => {
   const { onUpdateAmount, onRemoveFromCart } = useCartContext();

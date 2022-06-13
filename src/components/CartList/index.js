@@ -8,9 +8,9 @@ export const CartList = ({ data }) => {
       data={data.items}
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
-      renderItem={({ item }) => {
-        return <CartItem item={item} restaurantId={data.restaurantId} />;
-      }}
+      renderItem={({ item }) => (
+        <CartItem item={item} restaurantId={data.restaurantId} />
+      )}
     />
   );
 };

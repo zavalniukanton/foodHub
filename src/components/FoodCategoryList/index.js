@@ -1,4 +1,5 @@
 import { FlatList } from "react-native";
+
 import { FoodCategoryItem } from "../FoodCategoryItem";
 
 export const FoodCategoryList = ({
@@ -12,15 +13,13 @@ export const FoodCategoryList = ({
       keyExtractor={(item) => item.id}
       horizontal
       showsHorizontalScrollIndicator={false}
-      renderItem={({ item }) => {
-        return (
-          <FoodCategoryItem
-            item={item}
-            selectedCategory={selectedCategory}
-            onSelectCategory={onSelectCategory}
-          />
-        );
-      }}
+      renderItem={({ item }) => (
+        <FoodCategoryItem
+          item={item}
+          selectedCategory={selectedCategory}
+          onSelectCategory={onSelectCategory}
+        />
+      )}
     />
   );
 };

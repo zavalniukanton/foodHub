@@ -2,9 +2,9 @@ import { Pressable } from "react-native";
 import { memo, useCallback } from "react";
 
 import { styles } from "./styles";
+import { Colors } from "../../theme/colors";
 import { navigation } from "../../navigation/navigationRef";
 import { Icon } from "../Icon";
-import { Colors } from "../../theme/colors";
 
 export const GoBackButton = memo(({ style }) => {
   const handleGoBack = () => navigation.goBack();

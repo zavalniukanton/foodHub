@@ -1,12 +1,12 @@
-import { Text, Pressable, Image } from "react-native";
+import { Text, Image } from "react-native";
 import { useState, useMemo, useCallback } from "react";
 
 import { styles } from "./styles";
 import { Colors } from "../../theme/colors";
 import { Icon } from "../Icon";
 import { View } from "../View";
-import { AmountSelect } from "../AmountSelect";
 import { Button } from "../Button";
+import { AmountSelect } from "../AmountSelect";
 
 export const MenuItem = ({
   item,
@@ -82,10 +82,10 @@ export const MenuItem = ({
 
   return (
     <View style={styles.card}>
-      <Pressable style={styles.pressablePart} onPress={handleCardPress}>
+      <Button style={styles.pressablePart} onPress={handleCardPress}>
         <Text style={styles.foodName}>{item.name}</Text>
 
-        <Pressable style={styles.addButton} onPress={handleCardPress}>
+        <Button style={styles.addButton} onPress={handleCardPress}>
           <Icon
             name={
               isCardPresed.cardId === item.id && isCardPresed.expanded === true
@@ -95,7 +95,7 @@ export const MenuItem = ({
             size={24}
             color={Colors.blue}
           />
-        </Pressable>
+        </Button>
 
         <View style={styles.infoContainer}>
           <View style={styles.mainInfo}>
@@ -115,14 +115,14 @@ export const MenuItem = ({
 
           <Image source={{ uri: item.image }} style={styles.image} />
         </View>
-      </Pressable>
+      </Button>
 
       {isCardPresed.cardId === item.id && isCardPresed.expanded === true ? (
         <View style={styles.optionsContainer}>
           <Text style={styles.optionsTitle}>Options</Text>
 
           {item.options.map((option, index) => (
-            <Pressable
+            <Button
               key={option.id}
               style={styles.option}
               onPress={() => toggleOption(index)}
@@ -136,7 +136,7 @@ export const MenuItem = ({
               <Text style={styles.optionPrice}>
                 {option.price !== 0 ? `+${option.price} zł` : "free"}
               </Text>
-            </Pressable>
+            </Button>
           ))}
 
           <View style={styles.actionContainer}>

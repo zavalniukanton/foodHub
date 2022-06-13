@@ -8,9 +8,7 @@ export const OrderList = ({ data }) => {
       data={data}
       keyExtractor={(item) => item.orderAt}
       showsVerticalScrollIndicator={false}
-      renderItem={({ item }) => {
-        return <OrderItem item={item} />;
-      }}
+      renderItem={({ item }) => <OrderItem item={item} />}
     />
   );
 };

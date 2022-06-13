@@ -1,10 +1,10 @@
 import { TextInput } from "react-native";
 
 import { styles } from "./styles";
+import { Colors } from "../../theme/colors";
 import { View } from "../View";
 import { Icon } from "../Icon";
 import { Button } from "../Button";
-import { Colors } from "../../theme/colors";
 import { FormErrorMessage } from "../FormErrorMessage";
 
 export const TextField = ({

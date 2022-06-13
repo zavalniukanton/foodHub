@@ -13,16 +13,14 @@ export const MenuList = ({
       data={data}
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
-      renderItem={({ item }) => {
-        return (
-          <MenuItem
-            item={item}
-            onAddtoCart={onAddtoCart}
-            toggleOnCardPress={toggleOnCardPress}
-            isCardPresed={isCardPresed}
-          />
-        );
-      }}
+      renderItem={({ item }) => (
+        <MenuItem
+          item={item}
+          onAddtoCart={onAddtoCart}
+          toggleOnCardPress={toggleOnCardPress}
+          isCardPresed={isCardPresed}
+        />
+      )}
     />
   );
 };
