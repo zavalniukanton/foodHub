@@ -16,7 +16,9 @@ export const DrawerMenu = () => {
     navigation.navigate("Orders");
   };
 
-  const handleChartClick = () => {};
+  const handleChartClick = () => {
+    navigation.navigate("Chart");
+  };
 
   return (
     <View style={styles.container}>
