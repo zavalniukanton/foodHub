@@ -1,5 +1,5 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 
 import { styles } from "./styles";
 import { GoBackButton, Icon, MenuList, View } from "../../components";

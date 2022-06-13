@@ -23,7 +23,7 @@ export const CartItem = ({ item, restaurantId }) => {
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemPrice}>{item.totalPrice} zł</Text>
+        <Text style={styles.itemPrice}>{item.totalPrice * item.amount} zł</Text>
       </View>
 
       {item.selectedOptions.length ? (
