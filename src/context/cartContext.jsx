@@ -39,7 +39,6 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = ({ data, restaurantId }) => {
-    console.log("data", data);
     setCart((prevState) => ({
       ...prevState,
       [restaurantId]: {
@@ -87,7 +86,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cart,
-        onAddToCartContext: addToCart,
+        onAddToCart: addToCart,
         onUpdateAmount: updateAmount,
         onRemoveFromCart: removeFromCart,
         subtotalPrice,

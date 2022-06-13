@@ -1,5 +1,5 @@
 import { Text, ImageBackground, Image, Pressable } from "react-native";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { styles } from "./styles";
 import { GoBackButton, Icon, MenuList, View } from "../../components";
@@ -12,12 +12,14 @@ export const RestaurantScreen = ({ route }) => {
     params: { restaurant },
   } = route;
 
-  const { cart, onAddToCartContext, totalPrice } = useCartContext();
+  const { cart, onAddToCart, totalPrice } = useCartContext();
 
   const [isCardPresed, setIsCardPressed] = useState({
     cardId: null,
     expanded: false,
   });
+
+  const restaurantCartLength = cart?.[restaurant.id]?.items?.length;
 
   const toggleOnCardPress = (cardId, isPressed) => {
     setIsCardPressed((prevState) => ({
@@ -33,8 +35,8 @@ export const RestaurantScreen = ({ route }) => {
     navigation.navigate("Cart", { restaurantId: restaurant.id });
   };
 
-  const addToCart = (dish) => {
-    onAddToCartContext({
+  const handleAddToCart = (dish) => {
+    onAddToCart({
       data: {
         restaurantName: restaurant.name,
         restaurantLogo: restaurant.logo,
@@ -85,12 +87,12 @@ export const RestaurantScreen = ({ route }) => {
 
       <MenuList
         data={restaurant.menu}
-        onAddtoCart={addToCart}
+        onAddtoCart={handleAddToCart}
         toggleOnCardPress={toggleOnCardPress}
         isCardPresed={isCardPresed}
       />
 
-      {cart?.[restaurant.id]?.items?.length ? (
+      {restaurantCartLength > 0 ? (
         <Pressable style={styles.cartBanner} onPress={handleCartBannerPress}>
           <Icon
             name="cart"
@@ -99,9 +101,7 @@ export const RestaurantScreen = ({ route }) => {
             style={styles.cartIcon}
           />
           <View style={styles.cartBadge}>
-            <Text style={styles.cartBadgeText}>
-              {cart?.[restaurant.id]?.items?.length}
-            </Text>
+            <Text style={styles.cartBadgeText}>{restaurantCartLength}</Text>
           </View>
           <Text style={styles.cartBannerText}>Go to cart</Text>
           <Text style={styles.orderPrice}>

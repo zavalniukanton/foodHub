@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 import { styles } from "./styles";
 import { Colors } from "../../theme/colors";
@@ -36,6 +36,12 @@ export const CartScreen = ({ route }) => {
     });
     navigation.navigate("Orders");
   };
+
+  useEffect(() => {
+    if (!cart[restaurantId].items.length) {
+      navigation.goBack();
+    }
+  }, [cart[restaurantId].items.length]);
 
   return (
     <View style={styles.container}>
