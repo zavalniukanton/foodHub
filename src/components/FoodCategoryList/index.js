@@ -1,7 +1,7 @@
 import { FlatList } from "react-native";
 import { FoodCategoryItem } from "../FoodCategoryItem";
 
-export const FoodCategoriesList = ({
+export const FoodCategoryList = ({
   data,
   selectedCategory,
   onSelectCategory,

@@ -7,8 +7,8 @@ import { db } from "../../config/firebase";
 import {
   View,
   Button,
-  FoodCategoriesList,
-  RestaurantsList,
+  FoodCategoryList,
+  RestaurantList,
   Icon,
 } from "../../components";
 import { Colors } from "../../theme/colors";
@@ -69,12 +69,12 @@ export const HomeScreen = ({ navigation }) => {
     setSelectedCategory(category);
   };
 
-  const showRestaurantsList = (category) => {
+  const showRestaurantList = (category) => {
     if (category === "All") {
       return activeTab === "delivery" ? (
-        <RestaurantsList data={restaurantsWithDelivery} />
+        <RestaurantList data={restaurantsWithDelivery} />
       ) : (
-        <RestaurantsList data={restaurantsWithPickup} />
+        <RestaurantList data={restaurantsWithPickup} />
       );
     }
 
@@ -83,13 +83,13 @@ export const HomeScreen = ({ navigation }) => {
     }
 
     return activeTab === "delivery" ? (
-      <RestaurantsList
+      <RestaurantList
         data={restaurantsWithDelivery.filter((restaurant) =>
           restaurant.category.includes(category)
         )}
       />
     ) : (
-      <RestaurantsList
+      <RestaurantList
         data={restaurantsWithPickup.filter((restaurant) =>
           restaurant.category.includes(category)
         )}
@@ -122,14 +122,14 @@ export const HomeScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.categoriesContainer}>
-        <FoodCategoriesList
+        <FoodCategoryList
           data={categoriesToDisplay}
           selectedCategory={selectedCategory}
           onSelectCategory={handleFoodCategoryClick}
         />
       </View>
 
-      {showRestaurantsList(selectedCategory)}
+      {showRestaurantList(selectedCategory)}
     </View>
   );
 };
