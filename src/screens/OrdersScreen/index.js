@@ -15,14 +15,14 @@ export const OrdersScreen = () => {
 
   if (!orders.length)
     return (
-      <View style={styles.noOrdersContainer}>
+      <View style={styles.emptyOrdersContainer}>
         <Icon name="cart" size={44} color={Colors.blue} />
-        <Text style={styles.noOrdersTitle}>No orders yet</Text>
-        <Text style={styles.noOrdersDescription}>
+        <Text style={styles.emptyOrdersTitle}>No orders yet</Text>
+        <Text style={styles.emptyOrdersDescription}>
           You have not placed any orders yet
         </Text>
-        <Button style={styles.chooseRestaurantButton} onPress={handleClose}>
-          <Text style={styles.chooseRestaurantButtonText}>
+        <Button style={styles.browseRestaurantButton} onPress={handleClose}>
+          <Text style={styles.browseRestaurantButtonText}>
             Browse restaurants
           </Text>
         </Button>

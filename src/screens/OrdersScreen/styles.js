@@ -3,25 +3,25 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
-  noOrdersContainer: {
+  emptyOrdersContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.white,
   },
-  noOrdersTitle: {
+  emptyOrdersTitle: {
     marginTop: 10,
     fontWeight: "600",
     fontSize: 18,
     color: Colors.black,
   },
-  noOrdersDescription: {
+  emptyOrdersDescription: {
     marginTop: 10,
     fontWeight: "400",
     fontSize: 12,
     color: Colors.black,
   },
-  chooseRestaurantButton: {
+  browseRestaurantButton: {
     alignSelf: "center",
     width: "50%",
     height: 40,
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     borderColor: Colors.border,
     borderRadius: 4,
   },
-  chooseRestaurantButtonText: {
+  browseRestaurantButtonText: {
     fontWeight: "500",
     fontSize: 14,
     color: Colors.blue,
