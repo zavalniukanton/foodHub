@@ -74,6 +74,7 @@ export const MenuItem = ({
     onAddtoCart({
       id: item.id,
       name: item.name,
+      price: item.price,
       ...foodState,
       totalPrice: totalPriceForItem,
     });

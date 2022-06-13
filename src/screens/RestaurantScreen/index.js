@@ -12,7 +12,7 @@ export const RestaurantScreen = ({ route }) => {
     params: { restaurant },
   } = route;
 
-  const { cart, onAddToCart, totalPrice } = useCartContext();
+  const { cart, onAddToCart } = useCartContext();
 
   const [isCardPresed, setIsCardPressed] = useState({
     cardId: null,
@@ -47,6 +47,20 @@ export const RestaurantScreen = ({ route }) => {
       restaurantId: restaurant.id,
     });
   };
+
+  const totalPriceForCartBanner = cart?.[restaurant.id]?.items
+    ?.reduce(
+      (total, item) =>
+        (total +=
+          item.amount *
+          (item.price +
+            item.selectedOptions.reduce(
+              (totalOptionsPrice, option) => totalOptionsPrice + option.price,
+              0
+            ))),
+      0
+    )
+    .toFixed(2);
 
   return (
     <View isSafe style={styles.container}>
@@ -104,9 +118,7 @@ export const RestaurantScreen = ({ route }) => {
             <Text style={styles.cartBadgeText}>{restaurantCartLength}</Text>
           </View>
           <Text style={styles.cartBannerText}>Go to cart</Text>
-          <Text style={styles.orderPrice}>
-            ({totalPrice(restaurant.id)} zł)
-          </Text>
+          <Text style={styles.orderPrice}>({totalPriceForCartBanner} zł )</Text>
         </Pressable>
       ) : null}
     </View>

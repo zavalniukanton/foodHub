@@ -16,7 +16,14 @@ export const CartProvider = ({ children }) => {
   const subtotalPrice = (restaurantId) => {
     return cart[restaurantId].items
       .reduce(
-        (total, item) => (total += Number(item.totalPrice) * item.amount),
+        (total, item) =>
+          (total +=
+            item.amount *
+            (item.price +
+              item.selectedOptions.reduce(
+                (totalOptionsPrice, option) => totalOptionsPrice + option.price,
+                0
+              ))),
         0
       )
       .toFixed(2);
