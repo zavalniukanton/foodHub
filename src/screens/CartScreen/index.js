@@ -3,10 +3,10 @@ import { useCallback } from "react";
 
 import { styles } from "./styles";
 import { Colors } from "../../theme/colors";
-import { CartList, Icon, View, Button } from "../../components";
 import { navigation } from "../../navigation/navigationRef";
 import { useCartContext } from "../../context/cartContext";
 import { useOrderContext } from "../../context/orderContext";
+import { CartList, Icon, View, Button } from "../../components";
 
 export const CartScreen = ({ route }) => {
   const {

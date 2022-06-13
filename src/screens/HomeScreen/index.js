@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
 import { styles } from "./styles";
+import { Colors } from "../../theme/colors";
 import { db } from "../../config/firebase";
 import {
   View,
@@ -11,7 +12,6 @@ import {
   RestaurantList,
   Icon,
 } from "../../components";
-import { Colors } from "../../theme/colors";
 
 export const HomeScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("delivery");
