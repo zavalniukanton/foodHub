@@ -24,10 +24,18 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: Colors.white,
   },
-  slogan: {
+  headerContent: {
     marginLeft: 20,
+    justifyContent: "space-between",
+  },
+  slogan: {
     fontWeight: "600",
     fontSize: 18,
+    color: Colors.white,
+  },
+  userEmail: {
+    fontWeight: "400",
+    fontSize: 12,
     color: Colors.white,
   },
   menuItem: {
@@ -43,6 +51,6 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     fontWeight: "400",
     fontSize: 16,
-    color: Colors.black,
+    color: Colors.gray,
   },
 });
