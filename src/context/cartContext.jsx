@@ -39,11 +39,13 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = ({ data, restaurantId }) => {
+    console.log("data", data);
     setCart((prevState) => ({
       ...prevState,
       [restaurantId]: {
         restaurantId,
         restaurantName: data.restaurantName,
+        restaurantLogo: data.restaurantLogo,
         deliveryPrice: data.deliveryPrice,
         minOrder: data.minOrder,
         items: [...(prevState[restaurantId]?.items || []), data.menuItem],

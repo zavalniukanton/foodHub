@@ -21,7 +21,7 @@ export const CartScreen = ({ route }) => {
     remainingPrice,
   } = useCartContext();
 
-  const { orders, onAddToOrders } = useOrderContext();
+  const { onAddToOrders } = useOrderContext();
 
   const handleGoBack = useCallback(() => {
     navigation.goBack();
@@ -32,10 +32,10 @@ export const CartScreen = ({ route }) => {
       ...cart[restaurantId],
       orderAt: new Date(),
       orderStatus: "in progress",
+      orderPrice: totalPrice(restaurantId),
     });
+    navigation.navigate("Orders");
   };
-
-  console.log("orders", orders); // TODO: delete
 
   return (
     <View style={styles.container}>

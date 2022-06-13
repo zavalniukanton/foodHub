@@ -37,6 +37,7 @@ export const RestaurantScreen = ({ route }) => {
     onAddToCartContext({
       data: {
         restaurantName: restaurant.name,
+        restaurantLogo: restaurant.logo,
         deliveryPrice: restaurant.deliveryPrice,
         minOrder: restaurant.minOrder,
         menuItem: dish,
