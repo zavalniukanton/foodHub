@@ -40,11 +40,16 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: Colors.border,
   },
-  orderStatus: {
-    fontWeight: "400",
+  orderStatus: (orderStatus) => ({
+    fontWeight: "600",
     fontSize: 12,
-    color: Colors.blue,
-  },
+    color:
+      orderStatus === "in progress"
+        ? Colors.red
+        : orderStatus === "under way"
+        ? Colors.blue
+        : Colors.green,
+  }),
   oredrPrice: {
     fontWeight: "600",
     fontSize: 14,

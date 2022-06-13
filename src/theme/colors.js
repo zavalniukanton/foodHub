@@ -8,7 +8,7 @@ export const Colors = {
   gray: "#6e6869",
   border: "#bebebe",
   red: "#fc5c65",
-  green: "#004040",
+  green: "#228b22",
   mistyrose: "#ffe4e1",
   warning: "#fae7b5",
   bg_gradient: ["rgba(73, 77, 99, 0)", "#191b2f"],
