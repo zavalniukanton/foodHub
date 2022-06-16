@@ -3,11 +3,11 @@ import { Colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   messageWrapper: {
-    padding: 10,
+    padding: 8,
   },
   message: {
     borderRadius: 4,
-    padding: 10,
+    padding: 8,
   },
   name: {
     marginBottom: 4,
