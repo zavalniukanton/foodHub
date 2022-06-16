@@ -7,7 +7,7 @@ import { Colors } from "../../theme/colors";
 
 import { MESSAGES } from "../../data/messages";
 import { navigation } from "../../navigation/navigationRef";
-import { Button, ChatMessage, View } from "../../components";
+import { Button, ChatInputBox, ChatMessage, View } from "../../components";
 
 export const ChatScreen = () => {
   const handleClose = () => {
@@ -37,6 +37,8 @@ export const ChatScreen = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <ChatMessage message={item} />}
       />
+
+      <ChatInputBox />
     </ImageBackground>
   );
 };

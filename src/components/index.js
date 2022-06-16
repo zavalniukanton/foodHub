@@ -17,3 +17,4 @@ export * from "./CartItem";
 export * from "./DrawerMenu";
 export * from "./OrderList";
 export * from "./ChatMessage";
+export * from "./ChatInputBox";
