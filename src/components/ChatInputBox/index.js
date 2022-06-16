@@ -1,14 +1,29 @@
 import { KeyboardAvoidingView, Platform, TextInput } from "react-native";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { styles } from "./styles";
 import { Colors } from "../../theme/colors";
 import { View } from "../View";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
+import { AuthContext } from "../../context/authContext";
 
-export const ChatInputBox = () => {
+export const ChatInputBox = ({ onSendMessage }) => {
+  const { user } = useContext(AuthContext);
   const [message, setMessage] = useState("");
+
+  const handleSendPress = () => {
+    onSendMessage({
+      id: Date.now(),
+      content: message,
+      createdAt: new Date(),
+      user: {
+        id: user.email,
+        name: "Anton",
+      },
+    });
+    setMessage("");
+  };
 
   return (
     <KeyboardAvoidingView
@@ -23,7 +38,6 @@ export const ChatInputBox = () => {
             placeholder={"Type a message"}
             style={styles.textInput}
             multiline
-            maxLength={5}
             value={message}
             onChangeText={setMessage}
           />
@@ -42,14 +56,12 @@ export const ChatInputBox = () => {
             />
           )}
         </View>
-        <Button>
-          <View style={styles.buttonContainer}>
-            {!message ? (
-              <Icon name="microphone" size={28} color={Colors.white} />
-            ) : (
-              <Icon name="send" size={28} color={Colors.white} />
-            )}
-          </View>
+        <Button onPress={handleSendPress} style={styles.buttonContainer}>
+          {!message ? (
+            <Icon name="microphone" size={28} color={Colors.white} />
+          ) : (
+            <Icon name="send" size={28} color={Colors.white} />
+          )}
         </Button>
       </View>
     </KeyboardAvoidingView>
