@@ -17,7 +17,7 @@ export const DrawerMenu = () => {
   };
 
   const handleChartClick = () => {
-    navigation.navigate("Chart");
+    navigation.navigate("Chat");
   };
 
   return (
@@ -40,7 +40,7 @@ export const DrawerMenu = () => {
 
       <Button style={styles.menuItem} onPress={handleChartClick}>
         <Icon name="message-text" color={Colors.blue} size={18} />
-        <Text style={styles.menuItemName}>Chart</Text>
+        <Text style={styles.menuItemName}>Chat room</Text>
       </Button>
     </View>
   );
