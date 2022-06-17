@@ -5,6 +5,7 @@ import { Colors } from "../../theme/colors";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 20,
     backgroundColor: Colors.gray_light,
   },
   pageHeader: {
@@ -52,5 +53,28 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 16,
     color: Colors.gray,
+  },
+  logoutButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 12,
+    marginTop: "auto",
+    width: "50%",
+    padding: 6,
+    borderRadius: 100,
+    backgroundColor: Colors.white,
+  },
+  logoutButtonIcon: {
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.red,
+    borderRadius: 100,
+  },
+  logoutButtonText: {
+    marginLeft: 6,
+    fontWeight: "500",
+    fontSize: 16,
   },
 });
